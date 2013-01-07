@@ -1,4 +1,4 @@
-swuapi_ruby
+sendwithus
 ===========
 
-Send With Us Ruby API
+Send With Us Ruby client
