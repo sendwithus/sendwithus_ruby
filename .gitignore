@@ -12,6 +12,10 @@ test/tmp
 test/version_tmp
 tmp
 
+# vim stuff
+*.swp
+*.swo
+
 # YARD artifacts
 .yardoc
 _yardoc
