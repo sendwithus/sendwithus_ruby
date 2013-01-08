@@ -2,25 +2,28 @@
 require 'test/unit'
 require 'lib/sendwithus'
 
-API_PORT = '8000'
-API_HOST = 'localhost'
 API_PROTO = 'http'
-API_KEY = ''
+API_HOST = 'localhost'
+API_PORT = '8000'
+API_KEY = '68c9f6ccd3aa206362640c7fa9be236d4e0dd837'
 
 class TestRubygemSendwithus < Test::Unit::TestCase
 
     def setup
     end
 
-    def test_truth
-        assert true
-    end
+    def test_send
+        options = {
+            :api_host => API_HOST, 
+            :api_port => API_PORT, 
+            :api_proto => API_PROTO,
+            :debug => true
+        }
 
-    def test_simple
-        api = SendWithUs::API.new(API_KEY, :api_host => API_PORT, :api_port => API_PORT, :api_proto => API_PROTO)
+        api = SendWithUs::API.new(API_KEY, options)
 
-        data = {'name' => 'Jimmy'}
-        api.send('test_email', 'matt@sendwithus.com', data)
+        data = {'name' => 'Ruby test'}
+        api.send('test_send', 'matt@sendwithus.com', data)
 
         return true
     end
