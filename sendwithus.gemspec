@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
     s.author      = "Matt Harris"
     s.email       = "us@sendwithus.com"
     s.files       = ["lib/sendwithus.rb", "test/sendwithus_test.rb"] # + Dir["bin/templates/*"]
-    s.homepage    = "www.sendwithus.com"
+    s.homepage    = "http://www.sendwithus.com"
 	# TODO add any dependencies
 	# s.add_dependency("log4r", ">= 1.0.5")
 	# s.add_dependency("log4r")
