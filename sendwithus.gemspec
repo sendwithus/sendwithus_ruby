@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
     s.summary     = "SendWithUs.com Ruby Client"
     s.description = "SendWithUs.com Ruby Client"
     s.author      = "Matt Harris"
-    s.email       = "harrismc@gmail.com"
+    s.email       = "us@sendwithus.com"
     s.files       = ["lib/sendwithus.rb", "test/sendwithus_test.rb"] # + Dir["bin/templates/*"]
     s.homepage    = "www.sendwithus.com"
 	# TODO add any dependencies
