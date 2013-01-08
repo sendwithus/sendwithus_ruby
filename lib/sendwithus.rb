@@ -1,13 +1,35 @@
+##
+# Send With Us Ruby API Client
+#
+# Copyright sendwithus 2013
+# Author: matt@sendwithus.com
+# See: http://github.com/sendwithus for more
+
 require 'net/http'
 require 'uri'
 
 module SendWithUs
+
+    ##
+    # SendWithUs Module
+    #
+    # Just a container for the API for now.
+    
     VERSION = "0.1"
 
     class API
+
+        ##
+        # API object
+        #
+        # Currently only supports send
+        # API instance requires your sendiwthus API_KEY
+        
         attr_accessor :api_key
 
         def initialize(api_key, options = {})
+            # requires api_key
+            
             @api_key = api_key
 
             @api_proto = options[:api_proto] || 'http'
@@ -19,6 +41,8 @@ module SendWithUs
 
         private
         def build_request_path(endpoint)
+            # used to build the request path
+            
             path = "#{@api_proto}://#{@api_host}:#{@api_port}/api/v#{@api_version}/#{endpoint}"
             puts path
             return path
@@ -26,6 +50,9 @@ module SendWithUs
 
         private
         def api_request(endpoint, options = {})
+            # used to send the actual http request
+            # ignores response and sends synchronously atm
+            
             uri = URI.parse(build_request_path(endpoint))
 
             http = Net::HTTP.new(uri.host, uri.port)
@@ -41,6 +68,8 @@ module SendWithUs
         
         public
         def send(email_name, email_to, data = {})
+            # send a templated email!
+            
             data[:email_name] = email_name
             data[:email_to] = email_to
 
