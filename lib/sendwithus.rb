@@ -10,11 +10,6 @@ require 'uri'
 
 module SendWithUs
 
-    ##
-    # SendWithUs Module
-    #
-    # Just a container for the API for now.
-    
     VERSION = "0.1"
 
     class API
@@ -38,8 +33,17 @@ module SendWithUs
             @api_port = options[:api_port] || '80'
             @debug = options[:debug] || false
         end
+        def send(email_name, email_to, data = {})
+            # send a templated email!
+            
+            data[:email_name] = email_name
+            data[:email_to] = email_to
+
+            return api_request("send", data)
+        end
 
         private
+        
         def build_request_path(endpoint)
             # used to build the request path
             
@@ -48,7 +52,6 @@ module SendWithUs
             return path
         end
 
-        private
         def api_request(endpoint, options = {})
             # used to send the actual http request
             # ignores response and sends synchronously atm
@@ -66,15 +69,7 @@ module SendWithUs
             return response
         end
         
-        public
-        def send(email_name, email_to, data = {})
-            # send a templated email!
-            
-            data[:email_name] = email_name
-            data[:email_to] = email_to
 
-            return api_request("send", data)
-        end
     end
 end
 
