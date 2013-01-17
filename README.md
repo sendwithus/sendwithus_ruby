@@ -14,5 +14,5 @@ Send With Us Ruby client
     }
     api = SendWithUs::API.new(API_KEY, options)
     data = {'name' => 'Ruby test'}
-    api.send('test_send', 'matt@sendwithus.com', data)
+    api.send_email( 'test_send', 'matt@sendwithus.com', data )
 
