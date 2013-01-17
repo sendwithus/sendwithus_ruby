@@ -22,7 +22,7 @@ class TestRubygemSendwithus < Test::Unit::TestCase
   def setup
   end
 
-  def test_send
+  def test_send_email
     # ... tests sending an email against a local server
     
     options = {
@@ -35,7 +35,7 @@ class TestRubygemSendwithus < Test::Unit::TestCase
     api = SendWithUs::API.new(API_KEY, options)
 
     data = {'name' => 'Ruby test'}
-    api.send('test_send', 'matt@sendwithus.com', data)
+    api.send_email('test_send', 'matt@sendwithus.com', data)
 
     return true
   end

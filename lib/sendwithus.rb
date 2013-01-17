@@ -31,7 +31,7 @@ module SendWithUs
     ##
     # send a templated email!
     
-    def send(email_name, email_to, data = {})
+    def send_email(email_name, email_to, data = {})
       data[:email_name] = email_name
       data[:email_to] = email_to
       return api_request("send", data)
