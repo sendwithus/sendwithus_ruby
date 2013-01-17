@@ -10,12 +10,12 @@ require 'uri'
 
 module SendWithUs
   VERSION = "0.1"
+  ##
+  # API object
+  #
+  # Currently only supports send
+  # API instance requires your sendiwthus API_KEY
   class API
-    ##
-    # API object
-    #
-    # Currently only supports send
-    # API instance requires your sendiwthus API_KEY
     
     attr_accessor :api_key
     DEFAULT_URL = "http://api.sendwithus.com"
