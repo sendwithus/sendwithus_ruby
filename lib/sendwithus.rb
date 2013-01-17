@@ -28,7 +28,17 @@ module SendWithUs
       @debug = options[:debug] || false
     end
 
+    ##
+    # send a templated email!
+    
+    def send(email_name, email_to, data = {})
+      data[:email_name] = email_name
+      data[:email_to] = email_to
+      return api_request("send", data)
+    end
+
     private
+
     ##
     # used to build the request path
     
@@ -38,8 +48,6 @@ module SendWithUs
       puts path
       return path
     end
-
-    private
 
     ##
     # used to send the actual http request
@@ -58,17 +66,6 @@ module SendWithUs
       response = http.request(request)
 
       return response
-    end
-    
-    public
-
-    ##
-    # send a templated email!
-    
-    def send(email_name, email_to, data = {})
-      data[:email_name] = email_name
-      data[:email_to] = email_to
-      return api_request("send", data)
     end
   end
 end
