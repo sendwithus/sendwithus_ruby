@@ -45,7 +45,6 @@ module SendWithUs
     def build_request_path(endpoint)
       
       path = "#{@api_proto}://#{@api_host}:#{@api_port}/api/v#{@api_version}/#{endpoint}"
-      puts path
       return path
     end
 
