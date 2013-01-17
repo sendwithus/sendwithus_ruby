@@ -18,14 +18,17 @@ module SendWithUs
     # API instance requires your sendiwthus API_KEY
     
     attr_accessor :api_key
+    DEFAULT_URL = "http://api.sendwithus.com"
 
     def initialize(api_key, options = {})
       @api_key = api_key
-      @api_proto = options[:api_proto] || 'http'
-      @api_host = options[:api_host] || 'api.sendwithus.com'
-      @api_version = options[:api_version] || '0'
-      @api_port = options[:api_port] || '80'
-      @debug = options[:debug] || false
+      default_source = URI.parse(options[:url] || DEFAULT_URL)
+      @api_proto = options[:api_proto] || default_source.scheme
+      @api_host = options[:api_host] || default_source.host
+      @api_version = options[:api_version] || 0
+      @api_port = options[:api_port] || default_source.port
+      @debug = options[:debug]
+      @base_url = URI.parse("#{@api_proto}://#{@api_host}:#{@api_port}/api/v#{@api_version}")
     end
 
     ##
