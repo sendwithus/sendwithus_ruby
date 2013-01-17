@@ -45,29 +45,35 @@ module SendWithUs
     ##
     # used to build the request path
     
-    def build_request_path(endpoint)
-      
-      path = "#{@api_proto}://#{@api_host}:#{@api_port}/api/v#{@api_version}/#{endpoint}"
-      return path
+    def request_path(end_point)
+      "/api/v#{@api_version}/#{end_point}"
     end
 
     ##
     # used to send the actual http request
     # ignores response and sends synchronously atm
     
-    def api_request(endpoint, options = {})
-      
-      uri = URI.parse(build_request_path(endpoint))
+    def api_request(end_point, options = {})
 
-      http = Net::HTTP.new(uri.host, uri.port)
-      request = Net::HTTP::Post.new(uri.request_uri)
-
+      http = Net::HTTP.new(@base_url.host, @base_url.port)
+      http.use_ssl = (@base_url.scheme == 'https')
+      request = Net::HTTP::Post.new(request_path(end_point))
       request.add_field('X-SWU-API-KEY', @api_key)
       request.set_form_data(options)
 
       response = http.request(request)
+      case response
+      when Net::HTTPNotFound
+        raise "Invalid API end point: #{end_point} (#{request_path(end_point)})"
+      when Net::HTTPSuccess
+        # TODO: do something intelligent with response.body
+        return response
+      else
+        raise "Unknown error!"
+      end
 
-      return response
+    rescue Errno::ECONNREFUSED
+      raise "Could not connect to #{@base_url.host}!"  
     end
   end
 end
