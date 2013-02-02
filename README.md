@@ -3,6 +3,8 @@ sendwithus
 
 Send With Us Ruby client
 
+## Requires
+A json library!
 
 ## Usage
 
