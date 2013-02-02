@@ -35,7 +35,7 @@ class TestRubygemSendwithus < Test::Unit::TestCase
     api = SendWithUs::API.new(API_KEY, options)
 
     data = {'name' => 'Ruby test'}
-    api.send_email('test', 'test@sendwithus.com', data)
+    api.send('test', 'test@sendwithus.com', data)
 
     return true
   end
