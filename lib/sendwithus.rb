@@ -37,7 +37,7 @@ module SendWithUs
         ##
         # send a templated email!
 
-        def send_email(email_name, email_to, data = {})
+        def send(email_name, email_to, data = {})
             payload = {
                 :email_name => email_name,
                 :email_to => email_to,
