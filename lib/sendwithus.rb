@@ -38,9 +38,12 @@ module SendWithUs
         # send a templated email!
 
         def send_email(email_name, email_to, data = {})
-            data[:email_name] = email_name
-            data[:email_to] = email_to
-            return api_request("send", data)
+            payload = {
+                :email_name => email_name,
+                :email_to => email_to,
+                :email_data => data
+            }
+            return api_request("send", payload)
         end
 
         private
@@ -56,14 +59,14 @@ module SendWithUs
         # used to send the actual http request
         # ignores response and sends synchronously atm
 
-        def api_request(end_point, options = {})
+        def api_request(end_point, payload = {})
 
             request = Net::HTTP::Post.new(request_path(end_point), 
                         initheader = {'Content-Type' =>'application/json'})
             http = Net::HTTP.new(@base_url.host, @base_url.port)
             http.use_ssl = (@base_url.scheme == 'https')
             request.add_field('X-SWU-API-KEY', @api_key)
-            request.body = options.to_json
+            request.body = payload.to_json
 
             response = http.request(request)
             case response
