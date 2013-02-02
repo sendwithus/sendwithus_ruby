@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
     s.name        = "sendwithus"
-    s.version     = "0.0.2"
+    s.version     = "0.0.3"
     s.date        = "2013-01-08"
     s.summary     = "SendWithUs.com Ruby Client"
     s.description = "SendWithUs.com Ruby Client"
