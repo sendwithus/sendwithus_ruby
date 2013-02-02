@@ -67,13 +67,16 @@ module SendWithUs
 
             response = http.request(request)
             case response
-                when Net::HTTPNotFound
-                    raise "Invalid API end point: #{end_point} (#{request_path(end_point)})"
-                when Net::HTTPSuccess
-                    # TODO: do something intelligent with response.body
-                    return response
-                else
-                    raise "Unknown error! #{response.code}"
+            when Net::HTTPNotFound
+                raise "Invalid API end point: #{end_point} (#{request_path(end_point)})"
+            when Net::HTTPSuccess
+                # TODO: do something intelligent with response.body
+                if @debug
+                    puts response.body
+                end
+                return response
+            else
+                raise "Unknown error! #{response.code}"
             end
 
         rescue Errno::ECONNREFUSED
