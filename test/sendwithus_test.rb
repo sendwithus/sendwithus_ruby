@@ -8,9 +8,6 @@
 require 'test/unit'
 require 'lib/sendwithus'
 
-API_PROTO = 'http'
-API_HOST = 'beta.sendwithus.com'
-API_PORT = '80'
 API_KEY = 'THIS_IS_A_TEST_API_KEY'
 
 class TestRubygemSendwithus < Test::Unit::TestCase
@@ -26,9 +23,6 @@ class TestRubygemSendwithus < Test::Unit::TestCase
     # ... tests sending an email against a local server
     
     options = {
-        :api_host => API_HOST, 
-        :api_port => API_PORT, 
-        :api_proto => API_PROTO,
         :debug => true
     }
 

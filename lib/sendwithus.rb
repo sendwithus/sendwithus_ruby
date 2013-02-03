@@ -21,7 +21,7 @@ module SendWithUs
     class API
 
         attr_accessor :api_key
-        DEFAULT_URL = "http://api.sendwithus.com"
+        DEFAULT_URL = "https://beta.sendwithus.com"
 
         def initialize(api_key, options = {})
             @api_key = api_key
