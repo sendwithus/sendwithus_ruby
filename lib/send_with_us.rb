@@ -7,5 +7,6 @@ require 'net/https'
 require 'uri'
 require 'json'
 
-require 'send_with_us/base'
+require 'send_with_us/api'
+require 'send_with_us/config'
 require 'send_with_us/version'
