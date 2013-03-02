@@ -10,7 +10,8 @@ class TestApiRequest < MiniTest::Unit::TestCase
   end
 
   def test_payload
-
+    build_objects
+    assert_instance_of( Net::HTTPResponse, @request.send_with(@payload) )
   end
 
   def test_send_with_not_found_exception
