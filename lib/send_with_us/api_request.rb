@@ -9,7 +9,7 @@ module SendWithUs
       @configuration = configuration
     end
 
-    def send(payload)
+    def send_with(payload)
       request       = Net::HTTP::Post.new(request_path(:send), initheader = {'Content-Type' =>'application/json'})
       http          = Net::HTTP.new(@configuration.host, @configuration.port)
       http.use_ssl  = @configuration.protocol == 'https'
