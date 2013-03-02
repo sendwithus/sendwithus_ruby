@@ -5,6 +5,7 @@ require File.expand_path('../../lib/send_with_us.rb', __FILE__)
 
 require 'rubygems'
 require 'bundler'
+require 'mocha'
 
 begin
   Bundler.setup(:default, :development)

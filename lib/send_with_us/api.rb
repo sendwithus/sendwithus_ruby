@@ -9,7 +9,7 @@ module SendWithUs
     end
 
     def send(name, to, data = {})
-      payload = { email_name: name, email_to: to, email_data: data }
+      payload = { email_name: name, email_to: to, email_data: data }.to_json
       SendWithUs::ApiRequest.new(@configuration).send_with(payload)
     end
 

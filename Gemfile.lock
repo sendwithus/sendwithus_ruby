@@ -29,6 +29,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  mocha
   rake
   send_with_us!
   shoulda

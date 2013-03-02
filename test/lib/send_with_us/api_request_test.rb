@@ -12,8 +12,10 @@ class TestApiRequest < MiniTest::Unit::TestCase
 
   end
 
-  def test_payload_exceptions
-
+  def test_send_with_exceptions
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPNotFound)
+    assert_equal( true, @request.send(:request_path, :send) == SendWithUs::ApiInvalidEndpoint)
   end
 
   def test_request_path

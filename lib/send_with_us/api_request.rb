@@ -4,6 +4,7 @@ module SendWithUs
   class ApiUnknownError < StandardError; end
 
   class ApiRequest
+    attr_reader :response
 
     def initialize(configuration)
       @configuration = configuration
@@ -11,18 +12,18 @@ module SendWithUs
 
     def send_with(payload)
       request       = Net::HTTP::Post.new(request_path(:send), initheader = {'Content-Type' =>'application/json'})
-      http          = Net::HTTP.new(@configuration.host, @configuration.port)
-      http.use_ssl  = @configuration.protocol == 'https'
-      request.body  = payload.to_json
       request.add_field('X-SWU-API-KEY', @configuration.api_key)
 
-      response = http.request(request)
+      http          = Net::HTTP.new(@configuration.host, @configuration.port)
+      http.use_ssl  = @configuration.protocol == 'https'
 
-      case response
+      @response = http.request(request, payload)
+
+      case @response
       when Net::HTTPNotFound then raise SendWithUs::ApiInvalidEndpoint
       when Net::HTTPSuccess
-        puts response.body if @configuration.debug
-        response
+        puts @response.body if @configuration.debug
+        @response
       else raise SendWithUs::ApiUnknownError
       end
     rescue Errno::ECONNREFUSED
