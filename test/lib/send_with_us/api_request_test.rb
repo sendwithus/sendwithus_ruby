@@ -5,13 +5,14 @@ class TestApiRequest < MiniTest::Unit::TestCase
 
   def build_objects
     @payload  = {}
-    @config   = SendWithUs::Config.new( api_version: 3, api_key: 'TEST_KEY' )
+    @config   = SendWithUs::Config.new( api_version: 3, api_key: 'TEST_KEY', debug: false )
     @request  = SendWithUs::ApiRequest.new(@config)
   end
 
   def test_payload
     build_objects
-    assert_instance_of( Net::HTTPResponse, @request.send_with(@payload) )
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.send_with(@payload) )
   end
 
   def test_send_with_not_found_exception
