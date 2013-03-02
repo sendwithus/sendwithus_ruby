@@ -8,8 +8,8 @@ module SendWithUs
       @configuration = SendWithUs::Config.new(options.merge( api_key: @api_key ))
     end
 
-    def send(name, to, data = {})
-      payload = { email_name: name, email_to: to, email_data: data }.to_json
+    def send_with(email_name, to, data = {})
+      payload = { email_name: email_name, email_to: to, email_data: data }.to_json
       SendWithUs::ApiRequest.new(@configuration).send_with(payload)
     end
 
