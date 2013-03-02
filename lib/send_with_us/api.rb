@@ -1,6 +1,6 @@
 module SendWithUs
 
-  class Base
+  class Api
   end
 
 end
