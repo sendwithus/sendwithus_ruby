@@ -4,7 +4,8 @@ require_relative '../../test_helper'
 class TestApiRequest < MiniTest::Unit::TestCase
 
   def build_objects
-    @config   = SendWithUs::Config.new( api_version: 3 )
+    @payload  = {}
+    @config   = SendWithUs::Config.new( api_version: 3, api_key: 'TEST_KEY' )
     @request  = SendWithUs::ApiRequest.new(@config)
   end
 
@@ -12,10 +13,22 @@ class TestApiRequest < MiniTest::Unit::TestCase
 
   end
 
-  def test_send_with_exceptions
+  def test_send_with_not_found_exception
     build_objects
-    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPNotFound)
-    assert_equal( true, @request.send(:request_path, :send) == SendWithUs::ApiInvalidEndpoint)
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPNotFound.new(1.0, 404, "OK"))
+    assert_raises( SendWithUs::ApiInvalidEndpoint ) { @request.send_with(@payload) }
+  end
+
+  def test_send_with_unknown_exception
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPNotAcceptable.new(1.0, 406, "OK"))
+    assert_raises( SendWithUs::ApiUnknownError ) { @request.send_with(@payload) }
+  end
+
+  def test_send_with_connection_refused
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).raises(Errno::ECONNREFUSED.new)
+    assert_raises( SendWithUs::ApiConnectionRefused ) { @request.send_with(@payload) }
   end
 
   def test_request_path
