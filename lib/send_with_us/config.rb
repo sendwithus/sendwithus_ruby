@@ -34,5 +34,10 @@ module SendWithUs
         @settings.has_key?(key)
       end
 
+      def base_url
+        URI.parse("#{protocol}://#{host}:#{port}/api/v#{api_version}")
+      end
+
+
   end
 end
