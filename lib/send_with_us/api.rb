@@ -1,6 +1,7 @@
 module SendWithUs
 
   class Api
+    attr_reader :configuration
 
     def initialize(options = {})
       @configuration = SendWithUs::Config.new(options)

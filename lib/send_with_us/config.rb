@@ -8,6 +8,7 @@ module SendWithUs
 
       {
         url: DEFAULT_URL,
+        api_key:      nil,
         protocol:     source.scheme,
         host:         source.host,
         port:         source.port,
