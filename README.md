@@ -15,6 +15,8 @@ or with Bundler:
 
 ## Usage
 
+### General
+
 For any Ruby project:
 
     require 'rubygems'
@@ -27,6 +29,8 @@ For any Ruby project:
     rescue Exception => e
       puts "Error - #{e.class.name}: #{e.message}"
     end
+
+### Rails
 
 For a Rails app, create `send_with_us.rb` in `/config/initializers/`
 with the following:
