@@ -3,8 +3,21 @@ module SendWithUs
   class Api
     attr_reader :configuration
 
+    # ------------------------------ Class Methods ------------------------------
+
+    def self.configuration
+      @configuration ||= SendWithUs::Config.new
+    end
+
+    def self.configure
+      yield self.configuration if block_given?
+    end
+
+    # ------------------------------ Instance Methods ------------------------------
+
     def initialize(options = {})
-      @configuration = SendWithUs::Config.new(options)
+      settings = SendWithUs::Api.configuration.settings.merge(options)
+      @configuration = SendWithUs::Config.new(settings)
     end
 
     def send_with(email_name, to, data = {})

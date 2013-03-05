@@ -1,9 +1,37 @@
 require_relative '../../test_helper'
 
-class TestApi < MiniTest::Unit::TestCase
+describe SendWithUs::Api do
 
-  def test_send
-    
+  describe '.configuration with initializer' do
+    before do
+      @initializer_api_key = 'CONFIG_TEST'
+      SendWithUs::Api.configure { |config| config.api_key = @initializer_api_key }
+    end
+
+    it('configs') { SendWithUs::Api.new.configuration.api_key.must_equal @initializer_api_key }
+  end
+
+  describe '.configuration with custom' do
+    before do
+      @initializer_api_key = 'CONFIG_TEST'
+      @custom_api_key = 'STUFF_AND_THINGS'
+      SendWithUs::Api.configure { |config| config.api_key = @initializer_api_key }
+    end
+
+    it('configs') { SendWithUs::Api.new( api_key: @custom_api_key ).configuration.api_key.must_equal @custom_api_key }
   end
 
 end
+
+#class TestApi < MiniTest::Unit::TestCase
+
+  #describe '.configuration' do
+    #before { SendWithUs::Api.configuration { |config| config.api_key = 'CONFIG_TEST' } }
+    #it('configs') { SendWithUs::Api.new.configuration.api_key == 'CONFI!G_TEST' }
+  #end
+
+  #def test_send_with
+
+  #end
+
+#end
