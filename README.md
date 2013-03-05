@@ -54,6 +54,5 @@ In your application code where you want to send an email:
 The following errors may be generated:
 
     SendWithUs::ApiInvalidEndpoint - the target URI is probably incorrect
-    SendWithUs::ApiConnectionRefused - the target URI is probably
-  incorrect
+    SendWithUs::ApiConnectionRefused - the target URI is probably incorrect
     SendWithUs::ApiUnknownError - an unhandled HTTP error occurred
