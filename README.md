@@ -6,12 +6,12 @@ Ruby bindings for sending email via the SendWithUs API.
 
 ## Installation
 
-  gem install send_with_us
+    gem install send_with_us
 
 or with Bundler:
 
-  gem 'send_with_us'
-  bundle install
+    gem 'send_with_us'
+    bundle install
 
 ## Usage
 
