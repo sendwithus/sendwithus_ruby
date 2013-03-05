@@ -22,16 +22,3 @@ describe SendWithUs::Api do
   end
 
 end
-
-#class TestApi < MiniTest::Unit::TestCase
-
-  #describe '.configuration' do
-    #before { SendWithUs::Api.configuration { |config| config.api_key = 'CONFIG_TEST' } }
-    #it('configs') { SendWithUs::Api.new.configuration.api_key == 'CONFI!G_TEST' }
-  #end
-
-  #def test_send_with
-
-  #end
-
-#end
