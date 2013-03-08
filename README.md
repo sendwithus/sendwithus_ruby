@@ -1,6 +1,6 @@
 # sendwithus_ruby
 
-Ruby bindings for sending email via the SendWithUs API.
+Ruby bindings for sending email via the sendwithus API.
 
 [http://sendwithus.com](http://sendwithus.com)
 
@@ -24,7 +24,7 @@ For any Ruby project:
 
     begin
       obj = SendWithUs::Api.new( api_key: 'YOUR API KEY', debug: true )
-      result = obj.send_with('Welcome Email', 'recipient@testco.com', { company_name: 'TestCo' })
+      result = obj.send_with('email_id', 'recipient@testco.com', { company_name: 'TestCo' })
       puts result
     rescue Exception => e
       puts "Error - #{e.class.name}: #{e.message}"
@@ -43,7 +43,7 @@ with the following:
 In your application code where you want to send an email:
 
     begin
-      result = SendWithUs::Api.new.send_with('Welcome Email', 'recipient@testco.com', { company_name: 'TestCo' })
+      result = SendWithUs::Api.new.send_with('email_id', 'recipient@testco.com', { company_name: 'TestCo' })
       puts result
     rescue Exception => e
       puts "Error - #{e.class.name}: #{e.message}"
