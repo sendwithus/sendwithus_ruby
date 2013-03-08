@@ -2,7 +2,9 @@
 
 Ruby bindings for sending email via the sendwithus API.
 
-[http://sendwithus.com](http://sendwithus.com)
+[sendwithus.com](http://sendwithus.com)
+
+[![Build Status](https://api.travis-ci.org/sendwithus/sendwithus_ruby.png)](https://api.travis-ci.org/sendwithus/sendwithus_ruby)
 
 ## Installation
 
