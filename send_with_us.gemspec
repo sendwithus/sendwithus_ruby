@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["us@sendwithus.com"]
   gem.description   = %q{SendWithUs.com Ruby Client}
   gem.summary       = %q{SendWithUs.com Ruby Client}
-  gem.homepage      = "http://www.sendwithus.com"
+  gem.homepage      = "https://github.com/sendwithus/sendwithus_ruby"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

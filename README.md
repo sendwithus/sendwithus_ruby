@@ -73,3 +73,12 @@ The following errors may be generated:
     SendWithUs::ApiInvalidEndpoint - the target URI is probably incorrect or email_id is invalid
     SendWithUs::ApiConnectionRefused - the target URI is probably incorrect
     SendWithUs::ApiUnknownError - an unhandled HTTP error occurred
+
+## Internal
+Build gem with
+    gem build send_with_us.gemspec
+
+Publish gem with
+    gem publish send_with_us-VERSION.gem
+
+
