@@ -24,6 +24,30 @@ module SendWithUs
       case @response
       when Net::HTTPNotFound then
         raise SendWithUs::ApiInvalidEndpoint, path
+      when Net::HTTPSuccess then
+        puts @response.body if @configuration.debug
+        @response
+      else
+        raise SendWithUs::ApiUnknownError
+      end
+    rescue Errno::ECONNREFUSED
+      raise SendWithUs::ApiConnectionRefused
+    end
+
+    def get(endpoint)
+      path = request_path(endpoint)
+      request = Net::HTTP::Get.new(path, initheader = {'Content-Type' =>'application/json'})
+      request.add_field('X-SWU-API-KEY', @configuration.api_key)
+
+      http          = Net::HTTP.new(@configuration.host, @configuration.port)
+      http.use_ssl  = use_ssl?
+      http.set_debug_output($stdout) if @configuration.debug
+
+      @response = http.request(request)
+
+      case @response
+      when Net::HTTPNotFound then
+        raise SendWithUs::ApiInvalidEndpoint, path
       when Net::HTTPSuccess
         puts @response.body if @configuration.debug
         @response

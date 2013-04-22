@@ -26,7 +26,22 @@ For any Ruby project:
 
     begin
       obj = SendWithUs::Api.new( api_key: 'YOUR API KEY', debug: true )
-      result = obj.send_with('email_id', 'recipient@testco.com', { company_name: 'TestCo' })
+
+      # with only required params
+      result = obj.send_with(
+        'email_id',
+        { address: "user@email.com" },
+        { company_name: 'TestCo' })
+      puts result
+      
+      # with all optional params
+      result = obj.send_with(
+        'email_id',
+        { name: 'Matt', address: 'recipient@testco.com' },
+        { company_name: 'TestCo' },
+        { name: 'Company',
+          address: 'company@testco.com',
+          reply_to: 'info@testco.com' })
       puts result
     rescue Exception => e
       puts "Error - #{e.class.name}: #{e.message}"
@@ -45,7 +60,7 @@ with the following:
 In your application code where you want to send an email:
 
     begin
-      result = SendWithUs::Api.new.send_with('email_id', 'recipient@testco.com', { company_name: 'TestCo' })
+      result = SendWithUs::Api.new.send_with('email_id', { address: 'recipient@testco.com' }, { company_name: 'TestCo' })
       puts result
     rescue Exception => e
       puts "Error - #{e.class.name}: #{e.message}"
@@ -55,6 +70,6 @@ In your application code where you want to send an email:
 
 The following errors may be generated:
 
-    SendWithUs::ApiInvalidEndpoint - the target URI is probably incorrect
+    SendWithUs::ApiInvalidEndpoint - the target URI is probably incorrect or email_id is invalid
     SendWithUs::ApiConnectionRefused - the target URI is probably incorrect
     SendWithUs::ApiUnknownError - an unhandled HTTP error occurred

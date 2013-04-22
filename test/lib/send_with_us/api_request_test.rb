@@ -3,9 +3,9 @@ require_relative '../../test_helper'
 class TestApiRequest < MiniTest::Unit::TestCase
 
   def build_objects
-    @payload  = {}
-    @config   = SendWithUs::Config.new( api_version: 3, api_key: 'TEST_KEY', debug: false )
-    @request  = SendWithUs::ApiRequest.new(@config)
+    @payload = {}
+    @config  = SendWithUs::Config.new( api_version: '1_0', api_key: 'THIS_IS_A_TEST_API_KEY', debug: false )
+    @request = SendWithUs::ApiRequest.new(@config)
   end
 
   def test_payload
@@ -32,9 +32,15 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_raises( SendWithUs::ApiConnectionRefused ) { @request.send_with(@payload) }
   end
 
+  def test_emails
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.get(:emails) )
+  end
+
   def test_request_path
     build_objects
-    assert_equal( true, @request.send(:request_path, :send) == '/api/v3/send' )
+    assert_equal( true, @request.send(:request_path, :send) == '/api/v1_0/send' )
   end
 
 end
