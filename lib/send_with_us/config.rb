@@ -1,7 +1,7 @@
 module SendWithUs
   class Config
     attr_accessor :settings
-    #attr_writer :url, :api_key, :protocol, :host, :port, :api_verstion, :debug
+    #attr_writer :url, :api_key, :protocol, :host, :port, :api_version, :debug
 
     DEFAULT_URL = 'https://beta.sendwithus.com'
 
@@ -14,7 +14,7 @@ module SendWithUs
         protocol:     source.scheme,
         host:         source.host,
         port:         source.port,
-        api_version:  0,
+        api_version:  '1_0',
         debug:        true
       }
     end
