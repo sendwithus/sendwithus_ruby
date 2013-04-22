@@ -76,9 +76,11 @@ The following errors may be generated:
 
 ## Internal
 Build gem with
+
     gem build send_with_us.gemspec
 
 Publish gem with
+
     gem publish send_with_us-VERSION.gem
 
 
