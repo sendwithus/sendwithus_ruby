@@ -18,7 +18,7 @@ module SendWithUs
         port:         source.port,
         api_version:  '1_0',
         debug:        true,
-        client_stub:  "ruby-#{SendWithus.VERSION}"
+        client_stub:  "ruby-#{VERSION}"
       }
     end
 
