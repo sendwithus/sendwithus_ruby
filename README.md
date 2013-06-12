@@ -8,79 +8,102 @@ Ruby bindings for sending email via the sendwithus API.
 
 ## Installation
 
-    gem install send_with_us
+```bash
+gem install send_with_us
+```
 
 or with Bundler:
 
-    gem 'send_with_us'
-    bundle install
+```bash
+gem 'send_with_us'
+bundle install
+```
 
 ## Usage
 
 ### General
 
 For any Ruby project:
+```ruby
+require 'rubygems'
+require 'send_with_us'
 
-    require 'rubygems'
-    require 'send_with_us'
+begin
+    obj = SendWithUs::Api.new( api_key: 'YOUR API KEY', debug: true )
 
-    begin
-      obj = SendWithUs::Api.new( api_key: 'YOUR API KEY', debug: true )
-
-      # with only required params
-      result = obj.send_with(
-        'email_id',
-        { address: "user@email.com" },
-        { company_name: 'TestCo' })
-      puts result
-      
-      # with all optional params
-      result = obj.send_with(
+    # only required params
+    result = obj.send_with(
+        'EMAIL_ID',
+        { address: "user@email.com" })
+    puts result
+    
+    # with all optional params
+    result = obj.send_with(
         'email_id',
         { name: 'Matt', address: 'recipient@testco.com' },
         { company_name: 'TestCo' },
         { name: 'Company',
-          address: 'company@testco.com',
-          reply_to: 'info@testco.com' })
-      puts result
-    rescue Exception => e
-      puts "Error - #{e.class.name}: #{e.message}"
-    end
+            address: 'company@testco.com',
+            reply_to: 'info@testco.com' },
+        [
+            { name: 'CC',
+                address: 'cc@testco.com' }
+        ],
+        [
+            { name: 'BCC',
+                address: 'bcc@testco.com' },
+            { name: 'BCC2',
+                address: 'bcc2@test.com' }
+        ])
+    puts result
+rescue Exception => e
+    puts "Error - #{e.class.name}: #{e.message}"
+end
+```
 
 ### Rails
 
 For a Rails app, create `send_with_us.rb` in `/config/initializers/`
 with the following:
 
-    SendWithUs::Api.configure do |config|
-      config.api_key = 'YOUR API KEY'
-      config.debug = true
-    end
+```ruby
+SendWithUs::Api.configure do |config|
+    config.api_key = 'YOUR API KEY'
+    config.debug = true
+end
+```
 
 In your application code where you want to send an email:
 
-    begin
-      result = SendWithUs::Api.new.send_with('email_id', { address: 'recipient@testco.com' }, { company_name: 'TestCo' })
-      puts result
-    rescue Exception => e
-      puts "Error - #{e.class.name}: #{e.message}"
-    end
+```ruby
+begin
+    result = SendWithUs::Api.new.send_with('email_id', { address: 'recipient@testco.com' }, { company_name: 'TestCo' })
+    puts result
+rescue Exception => e
+    puts "Error - #{e.class.name}: #{e.message}"
+end
+```
 
 ## Errors
 
 The following errors may be generated:
 
-    SendWithUs::ApiInvalidEndpoint - the target URI is probably incorrect or email_id is invalid
-    SendWithUs::ApiConnectionRefused - the target URI is probably incorrect
-    SendWithUs::ApiUnknownError - an unhandled HTTP error occurred
+```ruby
+SendWithUs::ApiInvalidEndpoint - the target URI is probably incorrect or email_id is invalid
+SendWithUs::ApiConnectionRefused - the target URI is probably incorrect
+SendWithUs::ApiUnknownError - an unhandled HTTP error occurred
+```
 
 ## Internal
 Build gem with
 
-    gem build send_with_us.gemspec
+```bash
+gem build send_with_us.gemspec
+```
 
 Publish gem with
 
-    gem publish send_with_us-VERSION.gem
-
+```bash
+gem publish send_with_us-VERSION.gem
+```
 
