@@ -14,6 +14,7 @@ module SendWithUs
       path          = request_path(:send)
       request       = Net::HTTP::Post.new(path, initheader = {'Content-Type' =>'application/json'})
       request.add_field('X-SWU-API-KEY', @configuration.api_key)
+      request.add_field('X-SWU-API-CLIENT', @configuration.client_stub)
 
       http          = Net::HTTP.new(@configuration.host, @configuration.port)
       http.use_ssl  = use_ssl?
@@ -38,6 +39,7 @@ module SendWithUs
       path = request_path(endpoint)
       request = Net::HTTP::Get.new(path, initheader = {'Content-Type' =>'application/json'})
       request.add_field('X-SWU-API-KEY', @configuration.api_key)
+      request.add_field('X-SWU-API-CLIENT', @configuration.client_stub)
 
       http          = Net::HTTP.new(@configuration.host, @configuration.port)
       http.use_ssl  = use_ssl?

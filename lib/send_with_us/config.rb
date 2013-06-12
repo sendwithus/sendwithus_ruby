@@ -1,3 +1,5 @@
+require_relative 'version'
+
 module SendWithUs
   class Config
     attr_accessor :settings
@@ -15,7 +17,8 @@ module SendWithUs
         host:         source.host,
         port:         source.port,
         api_version:  '1_0',
-        debug:        true
+        debug:        true,
+        client_stub:  "ruby-#{SendWithus.VERSION}"
       }
     end
 
