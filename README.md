@@ -44,6 +44,17 @@ begin
         { company_name: 'TestCo' },
         { name: 'Company',
             address: 'company@testco.com',
+            reply_to: 'info@testco.com' })
+    puts result
+    
+    # COMING SOON
+    # cc/bb support is coming soon, here's a taste test
+    result = obj.send_with(
+        'email_id',
+        { name: 'Matt', address: 'recipient@testco.com' },
+        { company_name: 'TestCo' },
+        { name: 'Company',
+            address: 'company@testco.com',
             reply_to: 'info@testco.com' },
         [
             { name: 'CC',
