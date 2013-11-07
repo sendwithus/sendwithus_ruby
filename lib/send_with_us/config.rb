@@ -16,7 +16,7 @@ module SendWithUs
         protocol:     source.scheme,
         host:         source.host,
         port:         source.port,
-        api_version:  '1_0',
+        api_version:  '1',
         debug:        true,
         client_stub:  "ruby-#{VERSION}"
       }
