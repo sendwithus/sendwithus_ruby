@@ -5,7 +5,7 @@ module SendWithUs
     attr_accessor :settings
     #attr_writer :url, :api_key, :protocol, :host, :port, :api_version, :debug
 
-    DEFAULT_URL = 'https://beta.sendwithus.com'
+    DEFAULT_URL = 'https://api.sendwithus.com'
 
     def self.defaults
       source = URI.parse(DEFAULT_URL)
