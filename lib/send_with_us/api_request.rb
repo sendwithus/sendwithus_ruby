@@ -1,7 +1,7 @@
 module SendWithUs
   class ApiInvalidEndpoint < StandardError; end
   class ApiConnectionRefused < StandardError; end
-  class ApiInvalidEmail < StandardError; end
+  class ApiBadRequest < StandardError; end
   class ApiInvalidKey < StandardError; end
   class ApiUnknownError < StandardError; end
 
@@ -30,7 +30,7 @@ module SendWithUs
       when Net::HTTPForbidden then
         raise SendWithUs::ApiInvalidKey, 'Invalid api key: ' + @configuration.api_key
       when Net::HTTPBadRequest then
-        raise SendWithUs::ApiInvalidEmail, 'Bad request: ' + payload
+        raise SendWithUs::ApiBadRequest, @response.body
       when Net::HTTPSuccess then
         puts @response.body if @configuration.debug
         @response
@@ -59,7 +59,7 @@ module SendWithUs
       when Net::HTTPForbidden then
         raise SendWithUs::ApiInvalidKey, 'Invalid api key: ' + @configuration.api_key
       when Net::HTTPBadRequest then
-        raise SendWithUs::ApiInvalidEmail, 'Bad request: ' + payload
+        raise SendWithUs::ApiBadRequest, @response.body
       when Net::HTTPSuccess
         puts @response.body if @configuration.debug
         @response
