@@ -1,6 +1,8 @@
 module SendWithUs
   class ApiInvalidEndpoint < StandardError; end
   class ApiConnectionRefused < StandardError; end
+  class ApiInvalidEmail < StandardError; end
+  class ApiInvalidKey < StandardError; end
   class ApiUnknownError < StandardError; end
 
   class ApiRequest
@@ -25,14 +27,18 @@ module SendWithUs
       case @response
       when Net::HTTPNotFound then
         raise SendWithUs::ApiInvalidEndpoint, path
+      when Net::HTTPForbidden then
+        raise SendWithUs::ApiInvalidKey, 'Invalid api key: ' + @configuration.api_key
+      when Net::HTTPBadRequest then
+        raise SendWithUs::ApiInvalidEmail, 'Bad request: ' + payload
       when Net::HTTPSuccess then
         puts @response.body if @configuration.debug
         @response
       else
-        raise SendWithUs::ApiUnknownError
+        raise SendWithUs::ApiUnknownError, 'An unknown error has occurred'
       end
     rescue Errno::ECONNREFUSED
-      raise SendWithUs::ApiConnectionRefused
+      raise SendWithUs::ApiConnectionRefused, 'The connection was refused'
     end
 
     def get(endpoint)
@@ -50,14 +56,18 @@ module SendWithUs
       case @response
       when Net::HTTPNotFound then
         raise SendWithUs::ApiInvalidEndpoint, path
+      when Net::HTTPForbidden then
+        raise SendWithUs::ApiInvalidKey, 'Invalid api key: ' + @configuration.api_key
+      when Net::HTTPBadRequest then
+        raise SendWithUs::ApiInvalidEmail, 'Bad request: ' + payload
       when Net::HTTPSuccess
         puts @response.body if @configuration.debug
         @response
       else
-        raise SendWithUs::ApiUnknownError
+        raise SendWithUs::ApiUnknownError, 'An unknown error has occurred'
       end
     rescue Errno::ECONNREFUSED
-      raise SendWithUs::ApiConnectionRefused
+      raise SendWithUs::ApiConnectionRefused, 'The connection was refused'
     end
 
     private

@@ -1,3 +1,4 @@
+1.0.2 - More sensible error messages
 1.0.0 - Updated for v1_0 of SWU api. Added emails endpoint.
 0.0.4 - Rewritten to be more gem-like
       - Accepts configuration via a Rails-style initializer
