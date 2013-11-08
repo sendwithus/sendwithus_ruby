@@ -115,6 +115,6 @@ gem build send_with_us.gemspec
 Publish gem with
 
 ```bash
-gem publish send_with_us-VERSION.gem
+gem push send_with_us-VERSION.gem
 ```
 
