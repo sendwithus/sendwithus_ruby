@@ -7,7 +7,7 @@ require 'send_with_us/version'
 Gem::Specification.new do |gem|
   gem.name          = "send_with_us"
   gem.version       = SendWithUs::VERSION
-  gem.authors       = ["Matt Harris", "Chris Cummer"]
+  gem.authors       = ["Matt Harris", "Chris Cummer", "Nicholas Rempel"]
   gem.email         = ["us@sendwithus.com"]
   gem.description   = %q{SendWithUs.com Ruby Client}
   gem.summary       = %q{SendWithUs.com Ruby Client}

@@ -13,6 +13,7 @@ module SendWithUs
     end
 
     def send_with(payload)
+
       path          = request_path(:send)
       request       = Net::HTTP::Post.new(path, initheader = {'Content-Type' =>'application/json'})
       request.add_field('X-SWU-API-KEY', @configuration.api_key)
