@@ -21,6 +21,11 @@ module SendWithUs
     end
 
     def send_with(email_id, to, data = {}, from = {}, cc={}, bcc={})
+
+      if email_id == nil
+        raise SendWithUs::ApiNilEmailId, 'email_id cannot be nil'
+      end
+
       payload = { email_id: email_id, recipient: to, 
         email_data: data }
 

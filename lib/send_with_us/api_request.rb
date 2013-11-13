@@ -4,6 +4,7 @@ module SendWithUs
   class ApiBadRequest < StandardError; end
   class ApiInvalidKey < StandardError; end
   class ApiUnknownError < StandardError; end
+  class ApiNilEmailId < StandardError; end
 
   class ApiRequest
     attr_reader :response
