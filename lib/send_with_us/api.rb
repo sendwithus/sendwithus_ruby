@@ -1,4 +1,5 @@
 module SendWithUs
+  class ApiNilEmailId < StandardError; end
 
   class Api
     attr_reader :configuration
@@ -22,7 +23,7 @@ module SendWithUs
 
     def send_with(email_id, to, data = {}, from = {}, cc={}, bcc={})
 
-      if email_id == nil
+      if email_id.nil?
         raise SendWithUs::ApiNilEmailId, 'email_id cannot be nil'
       end
 

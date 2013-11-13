@@ -4,7 +4,6 @@ module SendWithUs
   class ApiBadRequest < StandardError; end
   class ApiInvalidKey < StandardError; end
   class ApiUnknownError < StandardError; end
-  class ApiNilEmailId < StandardError; end
 
   class ApiRequest
     attr_reader :response
@@ -14,6 +13,7 @@ module SendWithUs
     end
 
     def send_with(payload)
+
       path          = request_path(:send)
       request       = Net::HTTP::Post.new(path, initheader = {'Content-Type' =>'application/json'})
       request.add_field('X-SWU-API-KEY', @configuration.api_key)
