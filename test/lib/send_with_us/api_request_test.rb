@@ -14,6 +14,12 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_instance_of( Net::HTTPSuccess, @request.send_with(@payload) )
   end
 
+  def test_unsubscribe
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.drips_unsubscribe(@payload) )
+  end
+
   def test_send_with_not_found_exception
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPNotFound.new(1.0, 404, "OK"))

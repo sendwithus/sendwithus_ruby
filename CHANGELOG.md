@@ -1,3 +1,4 @@
+1.0.4 - Add drip campaign unsubscribe support
 1.0.3 - Don't allow nil email_id
 1.0.2 - More sensible error messages
 1.0.0 - Updated for v1_0 of SWU api. Added emails endpoint.
