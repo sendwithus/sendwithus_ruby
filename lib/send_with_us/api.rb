@@ -44,6 +44,18 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).send_with(payload)
     end
 
+    def drips_unsubscribe(email_address)
+
+      if email_address.nil?
+        raise SendWithUs::ApiNilEmailId, 'email_address cannot be nil'
+      end
+
+      payload = { email_address: email_address }
+      payload = payload.to_json
+      
+      SendWithUs::ApiRequest.new(@configuration).drips_unsubscribe(payload)
+    end
+
     def emails()
       SendWithUs::ApiRequest.new(@configuration).get(:emails)
     end
