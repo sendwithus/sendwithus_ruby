@@ -67,7 +67,7 @@ begin
                 address: 'bcc2@test.com' }
         ])
     puts result
-rescue Exception => e
+rescue => e
     puts "Error - #{e.class.name}: #{e.message}"
 end
 ```
@@ -90,7 +90,7 @@ In your application code where you want to send an email:
 begin
     result = SendWithUs::Api.new.send_with('email_id', { address: 'recipient@testco.com' }, { company_name: 'TestCo' })
     puts result
-rescue Exception => e
+rescue => e
     puts "Error - #{e.class.name}: #{e.message}"
 end
 ```
