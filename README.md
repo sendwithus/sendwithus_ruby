@@ -47,8 +47,7 @@ begin
             reply_to: 'info@testco.com' })
     puts result
     
-    # COMING SOON
-    # cc/bb support is coming soon, here's a taste test
+    # full cc/bcc support
     result = obj.send_with(
         'email_id',
         { name: 'Matt', address: 'recipient@testco.com' },
