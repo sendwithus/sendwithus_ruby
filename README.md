@@ -65,6 +65,19 @@ begin
             { name: 'BCC2',
                 address: 'bcc2@test.com' }
         ])
+
+    # Attachment support
+    result = obj.send_with(
+        'email_id',
+        { name: 'Matt', address: 'recipient@testco.com' },
+        { company_name: 'TestCo' },
+        { name: 'Company',
+            address: 'company@testco.com',
+            reply_to: 'info@testco.com' },
+        [],
+        [],
+        ['path/to/file.txt'])
+
     puts result
 rescue => e
     puts "Error - #{e.class.name}: #{e.message}"
