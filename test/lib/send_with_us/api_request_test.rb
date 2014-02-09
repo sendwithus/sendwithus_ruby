@@ -4,6 +4,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
 
   def build_objects
     @payload = {}
+    @api = SendWithUs::Api.new( api_key: 'THIS_IS_A_TEST_API_KEY', debug: false)
     @config  = SendWithUs::Config.new( api_version: '1_0', api_key: 'THIS_IS_A_TEST_API_KEY', debug: false )
     @request = SendWithUs::ApiRequest.new(@config)
   end
@@ -12,6 +13,21 @@ class TestApiRequest < MiniTest::Unit::TestCase
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
     assert_instance_of( Net::HTTPSuccess, @request.send_with(@payload) )
+  end
+
+  def test_attachment
+    build_objects
+    email_id = 'test_fixture_1'
+    result = @api.send_with(
+        email_id,
+        {name: 'Ruby Unit Test', address: 'matt@sendwithus.com'},
+        {name: 'sendwithus', address: 'matt@sendwithus.com'},
+        {},
+        [],
+        [],
+        ['README.md']
+    )
+    assert_instance_of( Net::HTTPOK, result )
   end
 
   def test_unsubscribe

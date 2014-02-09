@@ -1,3 +1,5 @@
+require "base64"
+
 module SendWithUs
   class ApiNilEmailId < StandardError; end
 
@@ -21,7 +23,7 @@ module SendWithUs
       @configuration = SendWithUs::Config.new(settings)
     end
 
-    def send_with(email_id, to, data = {}, from = {}, cc={}, bcc={})
+    def send_with(email_id, to, data = {}, from = {}, cc={}, bcc={}, files=[])
 
       if email_id.nil?
         raise SendWithUs::ApiNilEmailId, 'email_id cannot be nil'
@@ -38,6 +40,16 @@ module SendWithUs
       end
       if bcc.any?
         payload[:bcc] = bcc
+      end
+
+      files.each do |path|
+        file = open(path).read
+        id = File.basename(path)
+        data = Base64.encode64(file)
+        if payload[:files].nil?
+          payload[:files] = []
+        end
+        payload[:files] << {id: id, data: data}
       end
 
       payload = payload.to_json
