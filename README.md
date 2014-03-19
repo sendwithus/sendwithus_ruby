@@ -34,46 +34,46 @@ begin
     # only required params
     result = obj.send_with(
         'EMAIL_ID',
-        { address: "user@email.com" })
+        { address: "user@example.com" })
     puts result
     
     # with all optional params
     result = obj.send_with(
         'email_id',
-        { name: 'Matt', address: 'recipient@testco.com' },
+        { name: 'Matt', address: 'recipient@example.com' },
         { company_name: 'TestCo' },
         { name: 'Company',
-            address: 'company@testco.com',
-            reply_to: 'info@testco.com' })
+            address: 'company@example.com',
+            reply_to: 'info@example.com' })
     puts result
     
     # full cc/bcc support
     result = obj.send_with(
         'email_id',
-        { name: 'Matt', address: 'recipient@testco.com' },
+        { name: 'Matt', address: 'recipient@example.com' },
         { company_name: 'TestCo' },
         { name: 'Company',
-            address: 'company@testco.com',
-            reply_to: 'info@testco.com' },
+            address: 'company@example.com',
+            reply_to: 'info@example.com' },
         [
             { name: 'CC',
-                address: 'cc@testco.com' }
+                address: 'cc@example.com' }
         ],
         [
             { name: 'BCC',
-                address: 'bcc@testco.com' },
+                address: 'bcc@example.com' },
             { name: 'BCC2',
-                address: 'bcc2@test.com' }
+                address: 'bcc2@example.com' }
         ])
 
     # Attachment support
     result = obj.send_with(
         'email_id',
-        { name: 'Matt', address: 'recipient@testco.com' },
+        { name: 'Matt', address: 'recipient@example.com' },
         { company_name: 'TestCo' },
         { name: 'Company',
-            address: 'company@testco.com',
-            reply_to: 'info@testco.com' },
+            address: 'company@example.com',
+            reply_to: 'info@example.com' },
         [],
         [],
         ['path/to/file.txt'])
@@ -100,7 +100,7 @@ In your application code where you want to send an email:
 
 ```ruby
 begin
-    result = SendWithUs::Api.new.send_with('email_id', { address: 'recipient@testco.com' }, { company_name: 'TestCo' })
+    result = SendWithUs::Api.new.send_with('email_id', { address: 'recipient@example.com' }, { company_name: 'TestCo' })
     puts result
 rescue => e
     puts "Error - #{e.class.name}: #{e.message}"
