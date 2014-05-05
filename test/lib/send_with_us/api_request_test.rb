@@ -12,7 +12,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
   def test_payload
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.send_with(@payload) )
+    assert_instance_of( Net::HTTPSuccess, @request.post(:send, @payload) )
   end
 
   def test_attachment
@@ -20,8 +20,8 @@ class TestApiRequest < MiniTest::Unit::TestCase
     email_id = 'test_fixture_1'
     result = @api.send_with(
         email_id,
-        {name: 'Ruby Unit Test', address: 'matt@sendwithus.com'},
-        {name: 'sendwithus', address: 'matt@sendwithus.com'},
+        {name: 'Ruby Unit Test', address: 'matt@example.com'},
+        {name: 'sendwithus', address: 'matt@example.com'},
         {},
         [],
         [],
@@ -33,25 +33,25 @@ class TestApiRequest < MiniTest::Unit::TestCase
   def test_unsubscribe
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.drips_unsubscribe(@payload) )
+    assert_instance_of( Net::HTTPSuccess, @request.post(:'drips/unsubscribe', @payload) )
   end
 
   def test_send_with_not_found_exception
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPNotFound.new(1.0, 404, "OK"))
-    assert_raises( SendWithUs::ApiInvalidEndpoint ) { @request.send_with(@payload) }
+    assert_raises( SendWithUs::ApiInvalidEndpoint ) { @request.post(:send, @payload) }
   end
 
   def test_send_with_unknown_exception
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPNotAcceptable.new(1.0, 406, "OK"))
-    assert_raises( SendWithUs::ApiUnknownError ) { @request.send_with(@payload) }
+    assert_raises( SendWithUs::ApiUnknownError ) { @request.post(:send, @payload) }
   end
 
   def test_send_with_connection_refused
     build_objects
     Net::HTTP.any_instance.stubs(:request).raises(Errno::ECONNREFUSED.new)
-    assert_raises( SendWithUs::ApiConnectionRefused ) { @request.send_with(@payload) }
+    assert_raises( SendWithUs::ApiConnectionRefused ) { @request.post(:send, @payload) }
   end
 
   def test_emails
@@ -64,5 +64,4 @@ class TestApiRequest < MiniTest::Unit::TestCase
     build_objects
     assert_equal( true, @request.send(:request_path, :send) == '/api/v1_0/send' )
   end
-
 end

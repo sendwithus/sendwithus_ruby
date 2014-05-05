@@ -29,7 +29,7 @@ module SendWithUs
         raise SendWithUs::ApiNilEmailId, 'email_id cannot be nil'
       end
 
-      payload = { email_id: email_id, recipient: to, 
+      payload = { email_id: email_id, recipient: to,
         email_data: data }
 
       if from.any?
@@ -53,7 +53,7 @@ module SendWithUs
       end
 
       payload = payload.to_json
-      SendWithUs::ApiRequest.new(@configuration).send_with(payload)
+      SendWithUs::ApiRequest.new(@configuration).post(:send, payload)
     end
 
     def drips_unsubscribe(email_address)
@@ -64,12 +64,23 @@ module SendWithUs
 
       payload = { email_address: email_address }
       payload = payload.to_json
-      
-      SendWithUs::ApiRequest.new(@configuration).drips_unsubscribe(payload)
+
+      SendWithUs::ApiRequest.new(@configuration).post(:'drips/unsubscribe', payload)
     end
 
     def emails()
       SendWithUs::ApiRequest.new(@configuration).get(:emails)
+    end
+
+    def create_template(name, subject, html, text)
+      payload = {
+        name: name,
+        subject: subject,
+        html: html,
+        text: text
+      }.to_json
+
+      SendWithUs::ApiRequest.new(@configuration).post(:emails, payload)
     end
 
   end
