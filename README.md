@@ -84,6 +84,22 @@ rescue => e
 end
 ```
 
+### Remove Customer from Drip Campaign
+```ruby
+require 'rubygems'
+require 'send_with_us'
+
+begin
+    obj = SendWithUs::Api.new( api_key: 'YOUR API KEY', debug: true )
+
+    result = obj.drip_unsubscribe('customer@example.com')
+
+    puts result
+rescue => e
+    puts "Error - #{e.class.name}: #{e.message}"
+end
+```
+
 ### Rails
 
 For a Rails app, create `send_with_us.rb` in `/config/initializers/`
