@@ -45,9 +45,10 @@ module SendWithUs
         when Net::HTTPNotFound then
           raise SendWithUs::ApiInvalidEndpoint, path
         when Net::HTTPForbidden then
-          raise SendWithUs::ApiInvalidKey, 'Invalid api key: ' + @configuration.api_key
+          raise SendWithUs::ApiInvalidKey, "Invalid api key: #{@configuration.api_key}"
         when Net::HTTPBadRequest then
-          raise SendWithUs::ApiBadRequest, @response.body
+          raise SendWithUs::ApiBadRequest,
+            "Bad request: \"#{path}\" with payload \"#{payload}\""
         when Net::HTTPSuccess
           puts @response.body if @configuration.debug
           @response
