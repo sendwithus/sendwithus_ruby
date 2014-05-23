@@ -42,6 +42,18 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_raises( SendWithUs::ApiInvalidEndpoint ) { @request.post(:send, @payload) }
   end
 
+  def test_send_with_forbidden_exception
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPForbidden.new(1.0, 403, "OK"))
+    assert_raises( SendWithUs::ApiInvalidKey ) { @request.post(:send, @payload) }
+  end
+
+  def test_send_with_bad_request
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPBadRequest.new(1.0, 400, "OK"))
+    assert_raises( SendWithUs::ApiBadRequest ) { @request.post(:send, @payload) }
+  end
+
   def test_send_with_unknown_exception
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPNotAcceptable.new(1.0, 406, "OK"))

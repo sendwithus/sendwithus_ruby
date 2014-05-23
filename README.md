@@ -36,7 +36,7 @@ begin
         'EMAIL_ID',
         { address: "user@example.com" })
     puts result
-    
+
     # with all optional params
     result = obj.send_with(
         'email_id',
@@ -46,7 +46,7 @@ begin
             address: 'company@example.com',
             reply_to: 'info@example.com' })
     puts result
-    
+
     # full cc/bcc support
     result = obj.send_with(
         'email_id',
@@ -129,6 +129,8 @@ The following errors may be generated:
 
 ```ruby
 SendWithUs::ApiInvalidEndpoint - the target URI is probably incorrect or email_id is invalid
+SendWithUs::ApiInvalidKey - the sendwithus API key is invalid
+SendWithUs::ApiBadRequest - the API request is invalid
 SendWithUs::ApiConnectionRefused - the target URI is probably incorrect
 SendWithUs::ApiUnknownError - an unhandled HTTP error occurred
 ```
