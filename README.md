@@ -123,6 +123,11 @@ rescue => e
 end
 ```
 
+Take a look at our Mailer that you can use to replace ActionMailer
+
+[sendwithus_ruby_action_mailer](https://github.com/sendwithus/sendwithus_ruby_action_mailer)
+
+
 ## Errors
 
 The following errors may be generated:
