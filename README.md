@@ -65,6 +65,7 @@ begin
             { name: 'BCC2',
                 address: 'bcc2@example.com' }
         ])
+    puts result
 
     # Attachment support
     result = obj.send_with(
@@ -77,7 +78,21 @@ begin
         [],
         [],
         ['path/to/file.txt'])
+    puts result
 
+    # Set ESP account
+    # See: https://help.sendwithus.com/support/solutions/articles/1000088976-set-up-and-use-multiple 
+    result = obj.send_with(
+        'email_id',
+        { name: 'Matt', address: 'recipient@example.com' },
+        { company_name: 'TestCo' },
+        { name: 'Company',
+            address: 'company@example.com',
+            reply_to: 'info@example.com' },
+        [],
+        [],
+        [],
+        'esp_MYESPACCOUNT')
     puts result
 rescue => e
     puts "Error - #{e.class.name}: #{e.message}"
