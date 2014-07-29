@@ -53,7 +53,7 @@ module SendWithUs
           puts @response.body if @configuration.debug
           @response
         else
-          raise SendWithUs::ApiUnknownError, 'An unknown error has occurred'
+          raise SendWithUs::ApiUnknownError, "A #{@response.code} error has occurred: '#{@response.message}'"
         end
       rescue Errno::ECONNREFUSED
         raise SendWithUs::ApiConnectionRefused, 'The connection was refused'
