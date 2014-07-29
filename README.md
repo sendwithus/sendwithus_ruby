@@ -155,6 +155,18 @@ SendWithUs::ApiConnectionRefused - the target URI is probably incorrect
 SendWithUs::ApiUnknownError - an unhandled HTTP error occurred
 ```
 
+
+## Updating
+
+1. Implement changes (and tests!)
+2. Test in `irb` with `bundle console`
+3. Update the version in `lib/send_with_us/version.rb`
+4. Update `CHANGELOG.md`
+4. Re-bundle with `$ bundle package`
+5. Re-build with `$ gem build send_with_us.gemspec`
+6. Push changes to Github etc.
+
+
 ## Internal
 Build gem with
 
@@ -167,4 +179,3 @@ Publish gem with
 ```bash
 gem push send_with_us-VERSION.gem
 ```
-
