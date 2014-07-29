@@ -165,6 +165,8 @@ SendWithUs::ApiUnknownError - an unhandled HTTP error occurred
 4. Re-bundle with `$ bundle package`
 5. Re-build with `$ gem build send_with_us.gemspec`
 6. Push changes to Github etc.
+7. Code review & merge
+8. Push gem to server with `$ gem push send_with_us-FIXME_VERSION.gem`
 
 
 ## Internal
