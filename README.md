@@ -156,19 +156,6 @@ SendWithUs::ApiUnknownError - an unhandled HTTP error occurred
 ```
 
 
-## Updating
-
-1. Implement changes (and tests!)
-2. Test in `irb` with `$ bundle console`
-3. Update the version in `lib/send_with_us/version.rb`
-4. Update `CHANGELOG.md`
-4. Re-bundle with `$ bundle package`
-5. Re-build with `$ gem build send_with_us.gemspec`
-6. Push changes to Github etc.
-7. Code review & merge
-8. Push gem to server with `$ gem push send_with_us-FIXME_VERSION.gem`
-
-
 ## Internal
 Build gem with
 
