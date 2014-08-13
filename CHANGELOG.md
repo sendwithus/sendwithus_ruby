@@ -1,3 +1,4 @@
+1.1.4 - Add Drips v2.0 support
 1.0.5 - Add attachment support
 1.0.4 - Add drip campaign unsubscribe support
 1.0.3 - Don't allow nil email_id
