@@ -86,6 +86,30 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).post(:emails, payload)
     end
 
+    def list_drip_campaigns()
+        SendWithUs::ApiRequest.new(@configuration).get(:drip_campaigns)
+    end
+
+    def start_on_drip_campaign(recipient_address, drip_campaign_id)
+        payload = {
+            recipient_address: recipient_address
+        }.to_json
+
+        SendWithUs::ApiRequest.new(@configuration).post('drip_campaigns/#{drip_campaign_id}/activate'.to_sym, payload)
+    end
+
+    def remove_from_drip_campaign(recipient_address, drip_campaign_id)
+        payload = {
+            recipient_address: recipient_address
+        }.to_json
+
+        SendWithUs::ApiRequest.new(@configuration).post('drip_campaigns/#{drip_campaign_id}/deactivate'.to_sym, payload)
+    end
+
+    def list_drip_campaign_steps(drip_campaign_id)
+        SendWithUs::ApiRequest.new(@configuration).get('drip_campaigns/#{drip_campaign_id}/steps'.to_sym)
+    end
+
   end
 
 end
