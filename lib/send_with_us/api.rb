@@ -86,7 +86,7 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).post(:emails, payload)
     end
 
-    def create_customer_event(customer, event_name, revenue=nil)
+    def add_customer_event(customer, event_name, revenue=nil)
       
       if revenue.nil? 
         payload = { event_name: event_name }
