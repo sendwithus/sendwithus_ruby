@@ -90,10 +90,10 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_instance_of( Net::HTTPSuccess, @request.post('drip_campaigns/#{drip_campaign_id}/deactivate'.to_sym, @payload) )
   end
 
-  def test_list_drip_campaign_steps
+  def test_drip_campaign_details
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}/steps'.to_sym) )
+    assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}'.to_sym, @payload) )
   end
 
   def test_request_path
