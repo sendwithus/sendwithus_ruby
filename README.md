@@ -129,7 +129,7 @@ begin
     puts result
 
     # List steps of campaign dc_asdf1234
-    result = obj.list_drip_campaign_steps('dc_asdf1234')
+    result = obj.drip_campaign_details('dc_asdf1234')
     puts result
 
     # Add customer@example.com to campaign dc_asdf1234

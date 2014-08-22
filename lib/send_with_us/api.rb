@@ -106,8 +106,8 @@ module SendWithUs
         SendWithUs::ApiRequest.new(@configuration).post('drip_campaigns/#{drip_campaign_id}/deactivate'.to_sym, payload)
     end
 
-    def list_drip_campaign_steps(drip_campaign_id)
-        SendWithUs::ApiRequest.new(@configuration).get('drip_campaigns/#{drip_campaign_id}/steps'.to_sym)
+    def drip_campaign_details(drip_campaign_id)
+        SendWithUs::ApiRequest.new(@configuration).get('drip_campaigns/#{drip_campaign_id}'.to_sym)
     end
 
     def create_customer_event(customer, event_name, revenue=nil)
