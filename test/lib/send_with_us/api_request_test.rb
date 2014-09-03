@@ -93,7 +93,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
   def test_drip_campaign_details
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}'.to_sym, @payload) )
+    assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}'.to_sym) )
   end
 
   def test_request_path
