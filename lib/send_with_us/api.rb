@@ -110,7 +110,7 @@ module SendWithUs
         SendWithUs::ApiRequest.new(@configuration).get('drip_campaigns/#{drip_campaign_id}'.to_sym)
     end
 
-    def create_customer_event(customer, event_name, revenue=nil)
+    def add_customer_event(customer, event_name, revenue=nil)
 
       if revenue.nil?
         payload = { event_name: event_name }
