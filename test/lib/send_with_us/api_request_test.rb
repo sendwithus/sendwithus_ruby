@@ -72,6 +72,42 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_instance_of( Net::HTTPSuccess, @request.get(:emails) )
   end
 
+  def test_list_drip_campaigns
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.get(:'drip_campaigns') )
+  end
+
+  def test_start_on_drip_campaign
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.post('drip_campaigns/#{drip_campaign_id}/activate'.to_sym, @payload) )
+  end
+
+  def test_remove_from_drip_campaign
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.post('drip_campaigns/#{drip_campaign_id}/deactivate'.to_sym, @payload) )
+  end
+
+  def test_drip_campaign_details
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}'.to_sym) )
+  end
+
+  def test_list_customers_on_campaign
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}/customers'.to_sym) )
+  end
+
+  def test_list_customers_on_campaign_step
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}/step/#{drip_campaign_step_id}/customers'.to_sym) )
+  end
+
   def test_request_path
     build_objects
     assert_equal( true, @request.send(:request_path, :send) == '/api/v1_0/send' )
@@ -82,5 +118,5 @@ class TestApiRequest < MiniTest::Unit::TestCase
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
     assert_instance_of( Net::HTTPSuccess, @request.post(:'customers/test@sendwithus.com/events', @payload))
   end
-  
+
 end

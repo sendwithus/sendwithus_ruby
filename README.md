@@ -81,7 +81,7 @@ begin
     puts result
 
     # Set ESP account
-    # See: https://help.sendwithus.com/support/solutions/articles/1000088976-set-up-and-use-multiple 
+    # See: https://help.sendwithus.com/support/solutions/articles/1000088976-set-up-and-use-multiple
     result = obj.send_with(
         'email_id',
         { name: 'Matt', address: 'recipient@example.com' },
@@ -112,6 +112,43 @@ begin
     puts result
 rescue => e
     puts "Error - #{e.class.name}: #{e.message}"
+end
+```
+
+### Using Drips 2.0
+
+```ruby
+require 'rubygems'
+require 'send_with_us'
+
+begin
+    obj = SendWithUs::Api.new( api_key: 'YOUR API KEY', debug: true )
+
+    # List campaigns
+    result = obj.list_drip_campaigns()
+    puts result
+
+    # List steps of campaign dc_asdf1234
+    result = obj.drip_campaign_details('dc_asdf1234')
+    puts result
+
+    # Add customer@example.com to campaign dc_asdf1234
+    result = obj.start_on_drip_campaign('customer@example.com', 'dc_asdf1234', {location: 'Canada', total: '100.00'})
+    puts result
+
+    # Remove customer@example.com from campaign dc_asdf1234
+    result = obj.remove_from_drip_campaign('cusomter@example.com', 'dc_asdf1234')
+    puts result
+
+    # List active customers on campaign dc_asdf1234
+    result = obj.list_customers_on_campaign('dc_asdf1234')
+    puts result
+
+    # List active customers on campaign step dcs_qwer5678
+    result = obj.list_customers_on_campaign_step('dc_asdf1234', 'dcs_qwer5678')
+    puts result
+rescue => e
+    puts "error - #{e.class.name}: #{e.message}"
 end
 ```
 
