@@ -96,6 +96,18 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}'.to_sym) )
   end
 
+  def test_list_customers_on_campaign
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}/customers'.to_sym) )
+  end
+
+  def test_list_customers_on_campaign_step
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}/step/#{drip_campaign_step_id}/customers'.to_sym) )
+  end
+
   def test_request_path
     build_objects
     assert_equal( true, @request.send(:request_path, :send) == '/api/v1_0/send' )
@@ -106,5 +118,5 @@ class TestApiRequest < MiniTest::Unit::TestCase
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
     assert_instance_of( Net::HTTPSuccess, @request.post(:'customers/test@sendwithus.com/events', @payload))
   end
-  
+
 end
