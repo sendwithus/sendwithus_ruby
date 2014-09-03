@@ -71,6 +71,38 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).post(:'drips/unsubscribe', payload)
     end
 
+    def drip_campaign_activate(campaign_id, email_address, data)
+
+      if email_address.nil?
+        raise SendWithUs::ApiNilEmailId, 'email_address cannot be nil'
+      end
+
+      if campaign_id.nil?
+        raise SendWithUs::ApiBadRequest, 'campaign_id cannot be nil'
+      end
+
+      payload = data.merge( recipient_address: email_address )
+      payload = payload.to_json
+
+      SendWithUs::ApiRequest.new(@configuration).post("drip_campaigns/#{campaign_id}/activate", payload)
+    end
+
+    def drip_campaign_deactivate(campaign_id, email_address)
+
+      if email_address.nil?
+        raise SendWithUs::ApiNilEmailId, 'email_address cannot be nil'
+      end
+
+      if campaign_id.nil?
+        raise SendWithUs::ApiBadRequest, 'campaign_id cannot be nil'
+      end
+
+      payload = { recipient_address: email_address }
+      payload = payload.to_json
+
+      SendWithUs::ApiRequest.new(@configuration).post("drip_campaigns/#{campaign_id}/deactivate", payload)
+    end
+
     def emails()
       SendWithUs::ApiRequest.new(@configuration).get(:emails)
     end
