@@ -139,14 +139,6 @@ begin
     # Remove customer@example.com from campaign dc_asdf1234
     result = obj.remove_from_drip_campaign('cusomter@example.com', 'dc_asdf1234')
     puts result
-
-    # List active customers on campaign dc_asdf1234
-    result = obj.list_customers_on_campaign('dc_asdf1234')
-    puts result
-
-    # List active customers on campaign step dcs_qwer5678
-    result = obj.list_customers_on_campaign_step('dc_asdf1234', 'dcs_qwer5678')
-    puts result
 rescue => e
     puts "error - #{e.class.name}: #{e.message}"
 end
