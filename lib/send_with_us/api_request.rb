@@ -19,6 +19,10 @@ module SendWithUs
     def get(endpoint)
       request(Net::HTTP::Get, request_path(endpoint))
     end
+    
+    def delete(endpoint)
+      request(Net::HTTP::Delete, request_path(endpoint))
+    end
 
     private
 
