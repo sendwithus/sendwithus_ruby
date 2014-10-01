@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{SendWithUs.com Ruby Client}
   gem.summary       = %q{SendWithUs.com Ruby Client}
   gem.homepage      = "https://github.com/sendwithus/sendwithus_ruby"
+  gem.license       = "Apache-2.0"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
