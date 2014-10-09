@@ -76,7 +76,8 @@ class TestApiRequest < MiniTest::Unit::TestCase
         {},
         [],
         [],
-        ['README.md'],
+        [],
+        '',
         'v2'
     )
     assert_instance_of( Net::HTTPOK, result )

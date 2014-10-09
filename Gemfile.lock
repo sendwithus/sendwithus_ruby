@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    send_with_us (1.1.4)
+    send_with_us (1.2.1)
 
 GEM
   remote: https://rubygems.org/
