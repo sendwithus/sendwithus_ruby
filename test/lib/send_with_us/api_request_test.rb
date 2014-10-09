@@ -66,6 +66,23 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_raises( SendWithUs::ApiConnectionRefused ) { @request.post(:send, @payload) }
   end
 
+  def test_send_with_version
+    build_objects
+    email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
+    result = @api.send_with(
+        email_id,
+        {name: 'Ruby Unit Test', address: 'matt@example.com'},
+        {name: 'sendwithus', address: 'matt@example.com'},
+        {},
+        [],
+        [],
+        [],
+        '',
+        'v2'
+    )
+    assert_instance_of( Net::HTTPOK, result )
+  end
+
   def test_emails
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))

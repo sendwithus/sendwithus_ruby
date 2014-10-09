@@ -44,7 +44,9 @@ begin
         { company_name: 'TestCo' },
         { name: 'Company',
             address: 'company@example.com',
-            reply_to: 'info@example.com' })
+            reply_to: 'info@example.com' },
+		'esp_MYESPACCOUNT',	
+		'v2') # version name	
     puts result
 
     # full cc/bcc support
