@@ -68,7 +68,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
 
   def test_send_with_version
     build_objects
-    email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
+    email_id = 'tem_9YvYsaLW2Mw4tmPYesiLcVvpC'
     result = @api.send_with(
         email_id,
         {name: 'Ruby Unit Test', address: 'matt@example.com'},
@@ -98,31 +98,31 @@ class TestApiRequest < MiniTest::Unit::TestCase
   def test_start_on_drip_campaign
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.post('drip_campaigns/#{drip_campaign_id}/activate'.to_sym, @payload) )
+    assert_instance_of( Net::HTTPSuccess, @request.post("drip_campaigns/#{drip_campaign_id}/activate", @payload) )
   end
 
   def test_remove_from_drip_campaign
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.post('drip_campaigns/#{drip_campaign_id}/deactivate'.to_sym, @payload) )
+    assert_instance_of( Net::HTTPSuccess, @request.post("drip_campaigns/#{drip_campaign_id}/deactivate", @payload) )
   end
 
   def test_drip_campaign_details
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}'.to_sym) )
+    assert_instance_of( Net::HTTPSuccess, @request.get("drip_campaigns/#{drip_campaign_id}") )
   end
 
   def test_list_customers_on_campaign
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}/customers'.to_sym) )
+    assert_instance_of( Net::HTTPSuccess, @request.get("drip_campaigns/#{drip_campaign_id}/customers") )
   end
 
   def test_list_customers_on_campaign_step
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.get('drip_campaigns/#{drip_campaign_id}/step/#{drip_campaign_step_id}/customers'.to_sym) )
+    assert_instance_of( Net::HTTPSuccess, @request.get("drip_campaigns/#{drip_campaign_id}/step/#{drip_campaign_step_id}/customers") )
   end
 
   def test_request_path

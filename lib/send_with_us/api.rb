@@ -104,9 +104,9 @@ module SendWithUs
                 recipient_address: recipient_address,
                 email_data: email_data
             }.to_json
-        end
+       end
 
-        SendWithUs::ApiRequest.new(@configuration).post('drip_campaigns/#{drip_campaign_id}/activate'.to_sym, payload)
+        SendWithUs::ApiRequest.new(@configuration).post("drip_campaigns/#{drip_campaign_id}/activate", payload)
     end
 
     def remove_from_drip_campaign(recipient_address, drip_campaign_id)
@@ -114,19 +114,19 @@ module SendWithUs
             recipient_address: recipient_address
         }.to_json
 
-        SendWithUs::ApiRequest.new(@configuration).post('drip_campaigns/#{drip_campaign_id}/deactivate'.to_sym, payload)
+        SendWithUs::ApiRequest.new(@configuration).post("drip_campaigns/#{drip_campaign_id}/deactivate", payload)
     end
 
     def drip_campaign_details(drip_campaign_id)
-        SendWithUs::ApiRequest.new(@configuration).get('drip_campaigns/#{drip_campaign_id}'.to_sym)
+        SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}")
     end
 
     def list_customers_on_campaign(drip_campaign_id)
-        SendWithUs::ApiRequest.new(@configuration).get('drip_campaigns/#{drip_campaign_id}/customers'.to_sym)
+        SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}/customers")
     end
 
     def list_customers_on_campaign_step(drip_campaign_id, drip_campaign_step_id)
-        SendWithUs::ApiRequest.new(@configuration).get('drip_campaigns/#{drip_campaign_id}/step/#{drip_campaign_step_id}/customers'.to_sym)
+        SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}/step/#{drip_campaign_step_id}/customers")
     end
 
     def add_customer_event(customer, event_name, revenue=nil)
