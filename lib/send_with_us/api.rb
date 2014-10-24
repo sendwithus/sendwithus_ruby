@@ -120,7 +120,15 @@ module SendWithUs
     def drip_campaign_details(drip_campaign_id)
         SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}")
     end
+    
+    def list_customers_on_campaign(drip_campaign_id)
+        SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}/customers")
+    end
 
+    def list_customers_on_campaign_step(drip_campaign_id, drip_campaign_step_id)
+        SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}/step/#{drip_campaign_step_id}/customers")
+    end
+    
     def add_customer_event(customer, event_name, revenue=nil)
 
       if revenue.nil?
