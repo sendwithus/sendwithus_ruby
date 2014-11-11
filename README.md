@@ -146,6 +146,19 @@ rescue => e
 end
 ```
 
+### Customer conversion event
+You can use the Conversion API to track conversion and revenue data events against your sent emails
+
+**NOTE:** Revenue is in cents (eg. $100.50 = 10050)
+
+```ruby
+# With Revenue
+obj.conversion_event('customer@example.com', 10050)
+
+# Without Revenue
+obj.conversion_event('customer@example.com')
+```
+
 ### Rails
 
 For a Rails app, create `send_with_us.rb` in `/config/initializers/`
