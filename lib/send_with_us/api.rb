@@ -139,7 +139,7 @@ module SendWithUs
       end
 
       payload = payload.to_json
-      endpoint = 'customers/' + customer + '/events'
+      endpoint = 'customers/' + customer + '/conversions'
       SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload)
     end
 

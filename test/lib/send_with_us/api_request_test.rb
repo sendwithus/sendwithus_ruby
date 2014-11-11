@@ -134,7 +134,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
   def test_add_user_event()
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.post(:'customers/test@sendwithus.com/events', @payload))
+    assert_instance_of( Net::HTTPSuccess, @request.post(:'customers/test@sendwithus.com/conversions', @payload))
   end
 
   def test_conversion_event()
