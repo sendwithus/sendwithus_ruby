@@ -144,10 +144,9 @@ module SendWithUs
     end
 
     def customer_conversion(customer, revenue=nil)
+      payload = {}.to_json
 
-      if revenue.nil?
-        payload = {}
-      else
+      if revenue
         payload = { revenue: revenue }.to_json
       end
 
