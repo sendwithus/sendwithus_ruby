@@ -20,13 +20,13 @@ class TestApiRequest < MiniTest::Unit::TestCase
     build_objects
     email_id = 'test_fixture_1'
     result = @api.send_with(
-        email_id,
-        {name: 'Ruby Unit Test', address: 'matt@example.com'},
-        {name: 'sendwithus', address: 'matt@example.com'},
-        {},
-        [],
-        [],
-        ['README.md']
+      email_id,
+      {name: 'Ruby Unit Test', address: 'matt@example.com'},
+      {name: 'sendwithus', address: 'matt@example.com'},
+      {},
+      [],
+      [],
+      ['README.md']
     )
     assert_instance_of( Net::HTTPOK, result )
   end
@@ -71,15 +71,15 @@ class TestApiRequest < MiniTest::Unit::TestCase
     build_objects
     email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
     result = @api.send_with(
-        email_id,
-        {name: 'Ruby Unit Test', address: 'matt@example.com'},
-        {name: 'sendwithus', address: 'matt@example.com'},
-        {},
-        [],
-        [],
-        [],
-        '',
-        'v2'
+      email_id,
+      {name: 'Ruby Unit Test', address: 'matt@example.com'},
+      {name: 'sendwithus', address: 'matt@example.com'},
+      {},
+      [],
+      [],
+      [],
+      '',
+      'v2'
     )
     assert_instance_of( Net::HTTPOK, result )
   end
@@ -134,7 +134,13 @@ class TestApiRequest < MiniTest::Unit::TestCase
   def test_add_user_event()
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.post(:'customers/test@sendwithus.com/events', @payload))
+    assert_instance_of( Net::HTTPSuccess, @request.post(:'customers/test@sendwithus.com/conversions', @payload))
+  end
+
+  def test_conversion_event()
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.post(:'customers/test@sendwithus.com/conversions', @payload))
   end
 
 end
