@@ -153,10 +153,10 @@ You can use the Conversion API to track conversion and revenue data events again
 
 ```ruby
 # With Revenue
-obj.conversion_event('customer@example.com', 10050)
+obj.customer_conversion('customer@example.com', 10050)
 
 # Without Revenue
-obj.conversion_event('customer@example.com')
+obj.customer_conversion('customer@example.com')
 ```
 
 ### Rails
