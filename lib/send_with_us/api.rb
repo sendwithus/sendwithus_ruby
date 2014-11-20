@@ -153,5 +153,20 @@ module SendWithUs
       endpoint = "customers/#{customer}/conversions"
       SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload)
     end
+
+    def customer_create(email, data = {})
+      payload = {email: email}
+
+      if data.any?
+        payload[:data] = data
+      end
+
+      payload = payload.to_json
+      SendWithUs::ApiRequest.new(@configuration).post("customers", payload)
+    end
+
+    def customer_delete(email)
+      SendWithUs::ApiRequest.new(@configuration).delete("customers/#{email}")
+    end
   end
 end

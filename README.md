@@ -146,7 +146,22 @@ rescue => e
 end
 ```
 
-### Customer conversion event
+## Customers
+
+### Create/Update a Customer
+
+```ruby
+customer_data = {:FirstName => "Visha"}
+result = obj.customer_create("visha@example.com", customer_data)
+```
+
+### Delete a Customer
+
+```ruby
+result = obj.customer_delete("visha@example.com")
+```
+
+### Customer Conversion Event
 You can use the Conversion API to track conversion and revenue data events against your sent emails
 
 **NOTE:** Revenue is in cents (eg. $100.50 = 10050)
@@ -159,7 +174,7 @@ obj.customer_conversion('customer@example.com', 10050)
 obj.customer_conversion('customer@example.com')
 ```
 
-### Rails
+## Rails
 
 For a Rails app, create `send_with_us.rb` in `/config/initializers/`
 with the following:

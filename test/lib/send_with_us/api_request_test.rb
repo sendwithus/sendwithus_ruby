@@ -8,6 +8,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
     @config  = SendWithUs::Config.new( api_version: '1_0', api_key: 'THIS_IS_A_TEST_API_KEY', debug: false )
     @request = SendWithUs::ApiRequest.new(@config)
     @drip_campaign = { :drip_campaign_id => 'dc_Rmd7y5oUJ3tn86sPJ8ESCk', :drip_campaign_step_id => 'dcs_yaAMiZNWCLAEGw7GLjBuGY' }
+    @customer = { :email => "steve@sendwithus.com" }
   end
 
   def test_payload
@@ -141,6 +142,18 @@ class TestApiRequest < MiniTest::Unit::TestCase
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
     assert_instance_of( Net::HTTPSuccess, @request.post(:'customers/test@sendwithus.com/conversions', @payload))
+  end
+
+  def test_customer_create()
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.post(:'customers', @customer))
+  end
+
+  def test_customer_delete()
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.delete(:'customers/#{@customer[:email]}'))
   end
 
 end
