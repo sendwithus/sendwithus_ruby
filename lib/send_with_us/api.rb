@@ -23,7 +23,7 @@ module SendWithUs
       @configuration = SendWithUs::Config.new(settings)
     end
 
-    def send_with(email_id, to, data = {}, from = {}, cc={}, bcc={}, files=[], esp_account='', version_name='')
+    def send_with(email_id, to, data = {}, from = {}, cc = {}, bcc = {}, files = [], esp_account = '', version_name = '', headers = {})
 
       if email_id.nil?
         raise SendWithUs::ApiNilEmailId, 'email_id cannot be nil'
@@ -46,6 +46,9 @@ module SendWithUs
       end
       if version_name
         payload[:version_name] = version_name
+      end
+      if headers
+        payload[:headers] = headers
       end
 
       files.each do |path|
