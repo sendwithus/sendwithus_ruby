@@ -21,7 +21,19 @@ bundle install
 
 ## Usage
 
-### General
+### Send
+
+#### send_with parameters
+- **email\_id** - *string* - Template ID being sent
+- **to** - *hash* - Recipients' email address
+- **data** - *hash* - Email data
+- **from** - *hash* - From name/address/reply\_to
+- **cc** - *array* - array of CC addresses
+- **bcc** - *array* - array of BCC addresses
+- **files** - *array* - array of files to attach
+- **esp\_account** - *string* - ESP account used to send email
+- **version\_name** - *string* - version of template to send
+- **headers** - *hash* - custom email headers **NOTE** only supported by some ESPs
 
 For any Ruby project:
 ```ruby
@@ -45,8 +57,8 @@ begin
         { name: 'Company',
             address: 'company@example.com',
             reply_to: 'info@example.com' },
-		'esp_MYESPACCOUNT',	
-		'v2') # version name	
+		'esp_MYESPACCOUNT',
+		'v2') # version name
     puts result
 
     # full cc/bcc support
@@ -141,7 +153,7 @@ begin
     # Remove customer@example.com from campaign dc_asdf1234
     result = obj.remove_from_drip_campaign('cusomter@example.com', 'dc_asdf1234')
     puts result
-rescue => e
+    rescue => e
     puts "error - #{e.class.name}: #{e.message}"
 end
 ```
