@@ -21,7 +21,19 @@ bundle install
 
 ## Usage
 
-### General
+### Send
+
+#### send_with parameters
+- **email\_id** - *string* - Template ID being sent
+- **to** - *hash* - Recipients' email address
+- **data** - *hash* - Email data
+- **from** - *hash* - From name/address/reply\_to
+- **cc** - *array* - array of CC addresses
+- **bcc** - *array* - array of BCC addresses
+- **files** - *array* - array of files to attach
+- **esp\_account** - *string* - ESP account used to send email
+- **version\_name** - *string* - version of template to send
+- **headers** - *hash* - custom email headers **NOTE** only supported by some ESPs
 
 For any Ruby project:
 ```ruby
@@ -100,18 +112,6 @@ rescue => e
     puts "Error - #{e.class.name}: #{e.message}"
 end
 ```
-
-#### send_with parameters
-- **email\_id** - string - Template ID being sent
-- **to** - *hash* - Recipients' email address
-- **data** - *hash* - Email data
-- **from** - *hash* - From name/address/reply\_to
-- **cc** - *array* - array of CC addresses
-- **bcc** - *array* - array of BCC addresses
-- **files** - *array* - array of files to attach
-- **esp\_account** - *string* - ESP account used to send email
-- **version\_name** - *string* - version of template to send
-- **headers** - *hash* - custom email headers **NOTE** only supported by some ESPs
 
 ### Remove Customer from Drip Campaign
 ```ruby
