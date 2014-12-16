@@ -81,6 +81,17 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).get(:emails)
     end
 
+    def render(template_id, version_id = nil, template_data = {})
+      payload = {
+        template_id: template_id,
+        template_data: template_data,
+      }
+      payload[:version_id] = version_id if version_id
+      payload = payload.to_json
+
+      SendWithUs::ApiRequest.new(@configuration).post(:'render', payload)
+    end
+
     def create_template(name, subject, html, text)
       payload = {
         name: name,
