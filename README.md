@@ -45,13 +45,13 @@ begin
 
     # only required params
     result = obj.send_with(
-        'EMAIL_ID',
+        'template_id',
         { address: "user@example.com" })
     puts result
 
     # with all optional params
     result = obj.send_with(
-        'email_id',
+        'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
         { company_name: 'TestCo' },
         { name: 'Company',
@@ -63,7 +63,7 @@ begin
 
     # full cc/bcc support
     result = obj.send_with(
-        'email_id',
+        'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
         { company_name: 'TestCo' },
         { name: 'Company',
@@ -83,7 +83,7 @@ begin
 
     # Attachment support
     result = obj.send_with(
-        'email_id',
+        'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
         { company_name: 'TestCo' },
         { name: 'Company',
@@ -97,7 +97,7 @@ begin
     # Set ESP account
     # See: https://help.sendwithus.com/support/solutions/articles/1000088976-set-up-and-use-multiple
     result = obj.send_with(
-        'email_id',
+        'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
         { company_name: 'TestCo' },
         { name: 'Company',
@@ -107,6 +107,30 @@ begin
         [],
         [],
         'esp_MYESPACCOUNT')
+    puts result
+rescue => e
+    puts "Error - #{e.class.name}: #{e.message}"
+end
+```
+
+### Render a Template
+
+- **email\_id** - *string* - Template ID being rendered
+- **version\_id** - *string* - Version ID to render (optional)
+- **data** - *hash* - Email data to render the template with
+
+```ruby
+require 'rubygems'
+require 'send_with_us'
+
+begin
+    obj = SendWithUs::Api.new( api_key: 'YOUR API KEY', debug: true )
+
+    result = obj.render(
+        'template_id',
+        'version_id',
+        { company_name: 'TestCo' },
+
     puts result
 rescue => e
     puts "Error - #{e.class.name}: #{e.message}"
@@ -202,7 +226,7 @@ In your application code where you want to send an email:
 
 ```ruby
 begin
-    result = SendWithUs::Api.new.send_with('email_id', { address: 'recipient@example.com' }, { company_name: 'TestCo' })
+    result = SendWithUs::Api.new.send_with('template_id', { address: 'recipient@example.com' }, { company_name: 'TestCo' })
     puts result
 rescue => e
     puts "Error - #{e.class.name}: #{e.message}"
@@ -219,7 +243,7 @@ Take a look at our Mailer that you can use to replace ActionMailer
 The following errors may be generated:
 
 ```ruby
-SendWithUs::ApiInvalidEndpoint - the target URI is probably incorrect or email_id is invalid
+SendWithUs::ApiInvalidEndpoint - the target URI is probably incorrect or template_id is invalid
 SendWithUs::ApiInvalidKey - the sendwithus API key is invalid
 SendWithUs::ApiBadRequest - the API request is invalid
 SendWithUs::ApiConnectionRefused - the target URI is probably incorrect
