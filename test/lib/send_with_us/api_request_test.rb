@@ -103,6 +103,36 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_instance_of( Net::HTTPOK, result )
   end
 
+  def test_render
+    build_objects
+    email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
+    result = @api.render(
+      email_id
+    )
+    assert_instance_of( Net::HTTPOK, result )
+  end
+
+  def test_render_with_version
+    build_objects
+    email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
+    result = @api.render(
+      email_id,
+      'ver_UQuRkPN7aJjEoNfoHzvffD'
+    )
+    assert_instance_of( Net::HTTPOK, result )
+  end
+
+  def test_render_with_version_and_data
+    build_objects
+    email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
+    result = @api.render(
+      email_id,
+      'ver_UQuRkPN7aJjEoNfoHzvffD',
+      {'foo' => 'bar'}
+    )
+    assert_instance_of( Net::HTTPOK, result )
+  end
+
   def test_emails
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
