@@ -95,7 +95,7 @@ begin
     puts result
 
     # Set ESP account
-    # See: https://help.sendwithus.com/support/solutions/articles/1000088976-set-up-and-use-multiple
+    # See: https://help.sendwithus.com/support/solurtions/articles/1000088976-set-up-and-use-multiple
     result = obj.send_with(
         'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
@@ -117,7 +117,7 @@ end
 
 - **email\_id** - *string* - Template ID being rendered
 - **version\_id** - *string* - Version ID to render (optional)
-- **data** - *hash* - Email data to render the template with
+- **data** - *hash* - Email data to render the template with (optional)
 
 ```ruby
 require 'rubygems'
