@@ -30,10 +30,11 @@ bundle install
 - **from** - *hash* - From name/address/reply\_to
 - **cc** - *array* - array of CC addresses
 - **bcc** - *array* - array of BCC addresses
-- **files** - *array* - array of files to attach
+- **files** - *array* - array of files to attach, as strings or hashes (see below)
 - **esp\_account** - *string* - ESP account used to send email
 - **version\_name** - *string* - version of template to send
 - **headers** - *hash* - custom email headers **NOTE** only supported by some ESPs
+
 
 For any Ruby project:
 ```ruby
@@ -54,9 +55,12 @@ begin
         'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
         { company_name: 'TestCo' },
-        { name: 'Company',
-            address: 'company@example.com',
-            reply_to: 'info@example.com' },
+        {
+          name: 'Company',
+          address: 'company@example.com',
+          reply_to: 'info@example.com'
+        },
+        ['path/to/attachment.txt'],
 		'esp_MYESPACCOUNT',
 		'v2') # version name
     puts result
@@ -91,7 +95,13 @@ begin
             reply_to: 'info@example.com' },
         [],
         [],
-        ['path/to/file.txt'])
+        [
+          'path/to/file.txt',
+          { filename: 'customfilename.txt', attachment: 'path/to/file.txt' },
+          { filename: 'anotherfile.txt', attachment: File.open('path/to/file.txt') },
+          { filename: 'unpersistedattachment.txt', attachment: StringIO.new("raw data") }
+        ]
+    )
     puts result
 
     # Set ESP account
