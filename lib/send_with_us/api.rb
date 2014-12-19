@@ -51,14 +51,17 @@ module SendWithUs
         payload[:headers] = headers
       end
 
-      files.each do |path|
-        file = open(path).read
-        id = File.basename(path)
-        data = Base64.encode64(file)
-        if payload[:files].nil?
-          payload[:files] = []
+      if files.any?
+        payload[:files] = []
+
+        files.each do |file_data|
+          if file_data.is_a?(String)
+            attachment = SendWithUs::Attachment.new(file_data)
+          else
+            attachment = SendWithUs::Attachment.new(file_data[:attachment], file_data[:filename])
+          end
+          payload[:files] << { id: attachment.filename, data: attachment.encoded_data }
         end
-        payload[:files] << {id: id, data: data}
       end
 
       payload = payload.to_json
