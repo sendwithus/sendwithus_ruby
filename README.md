@@ -34,6 +34,7 @@ bundle install
 - **esp\_account** - *string* - ESP account used to send email
 - **version\_name** - *string* - version of template to send
 - **headers** - *hash* - custom email headers **NOTE** only supported by some ESPs
+- **tags** - *array* - array of strings to attach as tags
 
 
 For any Ruby project:
