@@ -1,3 +1,7 @@
+1.8.0 - Tags support for send_with
+1.7.0 - 
+1.6.0 - 
+1.5.0 - 
 1.4.3 - Add customer add/deletion support
 1.1.4 - Add Drips v2.0 support
 1.0.5 - Add attachment support
