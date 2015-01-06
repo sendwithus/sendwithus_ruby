@@ -103,6 +103,25 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_instance_of( Net::HTTPOK, result )
   end
 
+  def test_send_with_tags
+    build_objects
+    email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
+    result = @api.send_with(
+      email_id,
+      {name: 'Ruby Unit Test', address: 'matt@example.com'},
+      {name: 'sendwithus', address: 'matt@example.com'},
+      {},
+      [],
+      [],
+      [],
+      '',
+      'v2',
+      {},
+      ['tag1', 'tag2']
+    )
+    assert_instance_of( Net::HTTPOK, result )
+  end
+
   def test_render
     build_objects
     email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
