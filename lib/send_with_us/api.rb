@@ -1,6 +1,16 @@
 require "base64"
 
 module SendWithUs
+
+
+
+  class SendRequest
+
+  end
+
+
+
+
   class ApiNilEmailId < StandardError; end
 
   class Api
@@ -23,41 +33,105 @@ module SendWithUs
       @configuration = SendWithUs::Config.new(settings)
     end
 
-    def send_with(email_id, to, data = {}, from = {}, cc = {}, bcc = {}, files = [], esp_account = '', version_name = '', headers = {}, tags = [])
+    # DEPRECATED: Please use 'send' instead.
+    #
+    # Sends the specified email with any arguments.
+    #
+    # * *Args*    :
+    #   - +email_id+ -> ID of the email to send
+    #   - +to+ -> Hash of recipient details
+    #   - +data+ -> Hash of email data
+    #   - +from+ -> Hash of sender details
+    #   - +cc+ -> Array of CC recipients
+    #   - +bcc+ -> Array of BCC recipients
+    #   - +files+ -> Array of attachments
+    #   - +esp_account+ -> The ESP account to use
+    #   - +version_name+ -> The specific email version to use
+    #   - +headers+ -> Hash of headers
+    #   - +tags+ -> Array of tags
+    #
+    def send_with(email_id, to, data = {}, from = {}, cc = [], bcc = [], files = [], esp_account = '', version_name = '', headers = {}, tags = [])
+      warn "[DEPRECATED] 'send_with' is deprecated.  Please use 'send' instead."
 
+      send(
+        email_id,
+        to,
+        {
+          data: data,
+          from: from,
+          cc: cc,
+          bcc: bcc,
+          files: files,
+          esp_account: esp_account,
+          version_name: version_name,
+          headers: headers,
+          tags: tags
+        }
+      )
+    end
+
+    # Sends the specified email with any optional arguments
+    #
+    # * *Args*    :
+    #   - +email_id+ -> ID of the email to send
+    #   - +to+ -> Hash of recipient details
+    # * *Options*    :
+    #   - +:data+ -> Hash of email data
+    #   - +:from+ -> Hash of sender details
+    #   - +:cc+ -> Array of CC recipients
+    #   - +:bcc+ -> Array of BCC recipients
+    #   - +:files+ -> Array of attachments
+    #   - +:esp_account+ -> The ESP account to use
+    #   - +:version_name+ -> The specific email version to use
+    #   - +:headers+ -> Hash of headers
+    #   - +:tags+ -> Array of tags
+    #   - +:locale+ -> Localization string
+    #
+    def send(email_id, to, options = {})
       if email_id.nil?
         raise SendWithUs::ApiNilEmailId, 'email_id cannot be nil'
       end
 
-      payload = { email_id: email_id, recipient: to,
-                  email_data: data }
+      payload = {
+        email_id: email_id,
+        recipient: to
+      }
 
-      if from.any?
-        payload[:sender] = from
+      if not options[:data].nil? and options[:data].any?
+        payload[:email_data] = options[:data]
       end
-      if cc.any?
-        payload[:cc] = cc
+      if not options[:from].nil? and options[:from].any?
+        payload[:sender] = options[:from]
       end
-      if bcc.any?
-        payload[:bcc] = bcc
+      if not options[:cc].nil? and options[:cc].any?
+        payload[:cc] = options[:cc]
       end
-      if esp_account
-        payload[:esp_account] = esp_account
+      if not options[:bcc].nil? and options[:bcc].any?
+        payload[:bcc] = options[:bcc]
       end
-      if version_name
-        payload[:version_name] = version_name
+      if not options[:esp_account].nil?
+        payload[:esp_account] = options[:esp_account]
       end
-      if headers.any?
-        payload[:headers] = headers
+      if not options[:version_name].nil?
+        payload[:version_name] = options[:version_name]
       end
-      if tags.any?
-        payload[:tags] = tags
+      if not options[:headers].nil? and options[:headers].any?
+        payload[:headers] = options[:headers]
+      end
+      if not options[:tags].nil? and options[:tags].any?
+        payload[:tags] = options[:tags]
+      end
+      if not options[:tags].nil? and options[:tags].any?
+        payload[:tags] = options[:tags]
+      end
+      if not options[:locale].nil?
+        payload[:locale] = options[:locale]
       end
 
-      if files.any?
+      if not options[:files].nil? and options[:files].any?
         payload[:files] = []
 
-        files.each do |file_data|
+        options[:files].each do |file_data|
           if file_data.is_a?(String)
             attachment = SendWithUs::Attachment.new(file_data)
           else
@@ -149,8 +223,9 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}/step/#{drip_campaign_step_id}/customers")
     end
 
-    # DEPRECATED - use customer_conversion now
+    # DEPRECATED: Please use 'customer_conversion' instead.
     def add_customer_event(customer, event_name, revenue=nil)
+      warn "[DEPRECATED] 'add_customer_event' is deprecated.  Please use 'customer_conversion' instead."
 
       if revenue.nil?
         payload = { event_name: event_name }
