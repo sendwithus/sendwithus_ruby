@@ -125,7 +125,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
   def test_send_with_tags
     build_objects
     email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
-    result = @api.send(
+    result = @api.send_email(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
       data: {data: 'I AM DATA'},
@@ -139,7 +139,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
   def test_send_with_locale
     build_objects
     email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
-    result = @api.send(
+    result = @api.send_email(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
       data: {data: 'I AM DATA'},

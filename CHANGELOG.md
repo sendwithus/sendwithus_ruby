@@ -1,4 +1,4 @@
-1.9.0 - Introduce send() with locale support.  Deprecate send_with().
+1.9.0 - Locale support.  Introduce send_email().  Deprecate send_with().
 1.8.0 - Tags support for send_with
 1.7.0 - 
 1.6.0 - 
