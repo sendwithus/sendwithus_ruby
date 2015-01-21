@@ -1,16 +1,6 @@
 require "base64"
 
 module SendWithUs
-
-
-
-  class SendRequest
-
-  end
-
-
-
-
   class ApiNilEmailId < StandardError; end
 
   class Api
@@ -56,17 +46,15 @@ module SendWithUs
       send(
         email_id,
         to,
-        {
-          data: data,
-          from: from,
-          cc: cc,
-          bcc: bcc,
-          files: files,
-          esp_account: esp_account,
-          version_name: version_name,
-          headers: headers,
-          tags: tags
-        }
+        data: data,
+        from: from,
+        cc: cc,
+        bcc: bcc,
+        files: files,
+        esp_account: esp_account,
+        version_name: version_name,
+        headers: headers,
+        tags: tags
       )
     end
 
@@ -142,6 +130,7 @@ module SendWithUs
       end
 
       payload = payload.to_json
+      puts payload
       SendWithUs::ApiRequest.new(@configuration).post(:send, payload)
     end
 

@@ -59,7 +59,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
     result = @api.send_with(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
-      {},
+      {data: 'I AM DATA'},
       {name: 'sendwithus', address: 'matt@example.com'},
       [],
       [],
@@ -74,7 +74,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
     result = @api.send_with(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
-      {},
+      {data: 'I AM DATA'},
       {name: 'sendwithus', address: 'matt@example.com'},
       [],
       [],
@@ -91,7 +91,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
     result = @api.send_with(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
-      {},
+      {data: 'I AM DATA'},
       {name: 'sendwithus', address: 'matt@example.com'},
       [],
       [],
@@ -109,7 +109,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
     result = @api.send_with(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
-      {},
+      {data: 'I AM DATA'},
       {name: 'sendwithus', address: 'matt@example.com'},
       [],
       [],
@@ -128,6 +128,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
     result = @api.send(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
+      data: {data: 'I AM DATA'},
       from: {name: 'sendwithus', address: 'matt@example.com'},
       version_name: 'v2',
       tags: ['tag1', 'tag2']
@@ -141,6 +142,7 @@ class TestApiRequest < MiniTest::Unit::TestCase
     result = @api.send(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
+      data: {data: 'I AM DATA'},
       from: {name: 'sendwithus', address: 'matt@example.com'},
       version_name: 'v2',
       tags: ['tag1', 'tag2'],
