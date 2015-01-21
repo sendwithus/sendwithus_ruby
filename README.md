@@ -23,19 +23,19 @@ bundle install
 
 ### Send
 
-#### send options
+#### send_email arguments
 - **email\_id** - *string* - Template ID being sent
 - **to** - *hash* - Recipients' email address
-- **data** - *hash* - Email data
-- **from** - *hash* - From name/address/reply\_to
-- **cc** - *array* - array of CC addresses
-- **bcc** - *array* - array of BCC addresses
-- **files** - *array* - array of files to attach, as strings or hashes (see below)
-- **esp\_account** - *string* - ESP account used to send email
-- **version\_name** - *string* - version of template to send
-- **headers** - *hash* - custom email headers **NOTE** only supported by some ESPs
-- **tags** - *array* - array of strings to attach as tags
-- **locale** - *string* - Localization string
+- **:data** - *hash* - Email data
+- **:from** - *hash* - From name/address/reply\_to
+- **:cc** - *array* - array of CC addresses
+- **:bcc** - *array* - array of BCC addresses
+- **:files** - *array* - array of files to attach, as strings or hashes (see below)
+- **:esp\_account** - *string* - ESP account used to send email
+- **:version\_name** - *string* - version of template to send
+- **:headers** - *hash* - custom email headers **NOTE** only supported by some ESPs
+- **:tags** - *array* - array of strings to attach as tags
+- **:locale** - *string* - Localization string
 
 #### send_with arguments [DEPRECATED]
 - **email\_id** - *string* - Template ID being sent
@@ -60,20 +60,20 @@ begin
     obj = SendWithUs::Api.new( api_key: 'YOUR API KEY', debug: true )
 
     # required params
-    result = obj.send(
+    result = obj.send_email(
         'template_id',
         { address: "user@example.com" })
     puts result
 
     # required params and locale
-    result = obj.send(
+    result = obj.send_email(
         'template_id',
         { address: "user@example.com" }),
         locale: 'en-US'
     puts result
 
     # full cc/bcc support
-    result = obj.send(
+    result = obj.send_email(
         'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
         data: { company_name: 'TestCo' },
@@ -93,7 +93,7 @@ begin
     puts result
 
     # Attachment support
-    result = obj.send(
+    result = obj.send_email(
         'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
         data: { company_name: 'TestCo' },
@@ -113,7 +113,7 @@ begin
 
     # Set ESP account
     # See: https://help.sendwithus.com/support/solurtions/articles/1000088976-set-up-and-use-multiple
-    result = obj.send(
+    result = obj.send_email(
         'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
         data: { company_name: 'TestCo' },
@@ -127,7 +127,7 @@ begin
     puts result
 
     # all possible arguments
-    result = obj.send(
+    result = obj.send_email(
         'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
         data: { company_name: 'TestCo' },
