@@ -17,21 +17,6 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_instance_of( Net::HTTPSuccess, @request.post(:send, @payload) )
   end
 
-  def test_attachment
-    build_objects
-    email_id = 'test_fixture_1'
-    result = @api.send_with(
-      email_id,
-      {name: 'Ruby Unit Test', address: 'matt@example.com'},
-      {name: 'sendwithus', address: 'matt@example.com'},
-      {},
-      [],
-      [],
-      ['README.md']
-    )
-    assert_instance_of( Net::HTTPOK, result )
-  end
-
   def test_unsubscribe
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
@@ -68,14 +53,29 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_raises( SendWithUs::ApiConnectionRefused ) { @request.post(:send, @payload) }
   end
 
-  def test_send_with_version
+  def test_send_with_with_attachment
+    build_objects
+    email_id = 'test_fixture_1'
+    result = @api.send_with(
+      email_id,
+      {name: 'Ruby Unit Test', address: 'matt@example.com'},
+      {data: 'I AM DATA'},
+      {name: 'sendwithus', address: 'matt@example.com'},
+      [],
+      [],
+      ['README.md']
+    )
+    assert_instance_of( Net::HTTPOK, result )
+  end
+
+  def test_send_with_with_version
     build_objects
     email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
     result = @api.send_with(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
+      {data: 'I AM DATA'},
       {name: 'sendwithus', address: 'matt@example.com'},
-      {},
       [],
       [],
       [],
@@ -85,14 +85,14 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_instance_of( Net::HTTPOK, result )
   end
 
-  def test_send_with_headers
+  def test_send_with_with_headers
     build_objects
     email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
     result = @api.send_with(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
+      {data: 'I AM DATA'},
       {name: 'sendwithus', address: 'matt@example.com'},
-      {},
       [],
       [],
       [],
@@ -103,14 +103,14 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_instance_of( Net::HTTPOK, result )
   end
 
-  def test_send_with_tags
+  def test_send_with_with_tags
     build_objects
     email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
     result = @api.send_with(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
+      {data: 'I AM DATA'},
       {name: 'sendwithus', address: 'matt@example.com'},
-      {},
       [],
       [],
       [],
@@ -118,6 +118,35 @@ class TestApiRequest < MiniTest::Unit::TestCase
       'v2',
       {},
       ['tag1', 'tag2']
+    )
+    assert_instance_of( Net::HTTPOK, result )
+  end
+
+  def test_send_with_tags
+    build_objects
+    email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
+    result = @api.send_email(
+      email_id,
+      {name: 'Ruby Unit Test', address: 'matt@example.com'},
+      data: {data: 'I AM DATA'},
+      from: {name: 'sendwithus', address: 'matt@example.com'},
+      version_name: 'v2',
+      tags: ['tag1', 'tag2']
+    )
+    assert_instance_of( Net::HTTPOK, result )
+  end
+
+  def test_send_with_locale
+    build_objects
+    email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
+    result = @api.send_email(
+      email_id,
+      {name: 'Ruby Unit Test', address: 'matt@example.com'},
+      data: {data: 'I AM DATA'},
+      from: {name: 'sendwithus', address: 'matt@example.com'},
+      version_name: 'v2',
+      tags: ['tag1', 'tag2'],
+      locale: 'en-US'
     )
     assert_instance_of( Net::HTTPOK, result )
   end

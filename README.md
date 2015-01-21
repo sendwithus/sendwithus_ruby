@@ -23,7 +23,21 @@ bundle install
 
 ### Send
 
-#### send_with parameters
+#### send_email arguments
+- **email\_id** - *string* - Template ID being sent
+- **to** - *hash* - Recipients' email address
+- **:data** - *hash* - Email data
+- **:from** - *hash* - From name/address/reply\_to
+- **:cc** - *array* - array of CC addresses
+- **:bcc** - *array* - array of BCC addresses
+- **:files** - *array* - array of files to attach, as strings or hashes (see below)
+- **:esp\_account** - *string* - ESP account used to send email
+- **:version\_name** - *string* - version of template to send
+- **:headers** - *hash* - custom email headers **NOTE** only supported by some ESPs
+- **:tags** - *array* - array of strings to attach as tags
+- **:locale** - *string* - Localization string
+
+#### send_with arguments [DEPRECATED]
 - **email\_id** - *string* - Template ID being sent
 - **to** - *hash* - Recipients' email address
 - **data** - *hash* - Email data
@@ -45,40 +59,32 @@ require 'send_with_us'
 begin
     obj = SendWithUs::Api.new( api_key: 'YOUR API KEY', debug: true )
 
-    # only required params
-    result = obj.send_with(
+    # required params
+    result = obj.send_email(
         'template_id',
         { address: "user@example.com" })
     puts result
 
-    # with all optional params
-    result = obj.send_with(
+    # required params and locale
+    result = obj.send_email(
         'template_id',
-        { name: 'Matt', address: 'recipient@example.com' },
-        { company_name: 'TestCo' },
-        {
-          name: 'Company',
-          address: 'company@example.com',
-          reply_to: 'info@example.com'
-        },
-        ['path/to/attachment.txt'],
-		'esp_MYESPACCOUNT',
-		'v2') # version name
+        { address: "user@example.com" }),
+        locale: 'en-US'
     puts result
 
     # full cc/bcc support
-    result = obj.send_with(
+    result = obj.send_email(
         'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
-        { company_name: 'TestCo' },
-        { name: 'Company',
+        data: { company_name: 'TestCo' },
+        from: { name: 'Company',
             address: 'company@example.com',
             reply_to: 'info@example.com' },
-        [
+        cc: [
             { name: 'CC',
                 address: 'cc@example.com' }
         ],
-        [
+        bcc: [
             { name: 'BCC',
                 address: 'bcc@example.com' },
             { name: 'BCC2',
@@ -87,16 +93,16 @@ begin
     puts result
 
     # Attachment support
-    result = obj.send_with(
+    result = obj.send_email(
         'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
-        { company_name: 'TestCo' },
-        { name: 'Company',
+        data: { company_name: 'TestCo' },
+        from: { name: 'Company',
             address: 'company@example.com',
             reply_to: 'info@example.com' },
-        [],
-        [],
-        [
+        cc: [],
+        bcc: [],
+        files: [
           'path/to/file.txt',
           { filename: 'customfilename.txt', attachment: 'path/to/file.txt' },
           { filename: 'anotherfile.txt', attachment: File.open('path/to/file.txt') },
@@ -107,17 +113,71 @@ begin
 
     # Set ESP account
     # See: https://help.sendwithus.com/support/solurtions/articles/1000088976-set-up-and-use-multiple
+    result = obj.send_email(
+        'template_id',
+        { name: 'Matt', address: 'recipient@example.com' },
+        data: { company_name: 'TestCo' },
+        from: { name: 'Company',
+            address: 'company@example.com',
+            reply_to: 'info@example.com' },
+        cc: [],
+        bcc: [],
+        files: [],
+        esp_account: 'esp_MYESPACCOUNT')
+    puts result
+
+    # all possible arguments
+    result = obj.send_email(
+        'template_id',
+        { name: 'Matt', address: 'recipient@example.com' },
+        data: { company_name: 'TestCo' },
+        from: {
+          name: 'Company',
+          address: 'company@example.com',
+          reply_to: 'info@example.com'
+        },
+        cc: [
+            { name: 'CC',
+                address: 'cc@example.com' }
+        ],
+        bcc: [
+            { name: 'BCC',
+                address: 'bcc@example.com' },
+            { name: 'BCC2',
+                address: 'bcc2@example.com' }
+        ])
+        files: ['path/to/attachment.txt'],
+        esp_account: 'esp_MYESPACCOUNT',
+        version: 'v2',
+        tags: ['tag1', 'tag2'],
+        locale: 'en-US')
+    puts result
+
+    # send_with - DEPRECATED!
     result = obj.send_with(
         'template_id',
         { name: 'Matt', address: 'recipient@example.com' },
         { company_name: 'TestCo' },
-        { name: 'Company',
-            address: 'company@example.com',
-            reply_to: 'info@example.com' },
-        [],
-        [],
-        [],
-        'esp_MYESPACCOUNT')
+        {
+          name: 'Company',
+          address: 'company@example.com',
+          reply_to: 'info@example.com'
+        },
+        [
+            { name: 'CC',
+                address: 'cc@example.com' }
+        ],
+        [
+            { name: 'BCC',
+                address: 'bcc@example.com' },
+            { name: 'BCC2',
+                address: 'bcc2@example.com' }
+        ])
+        ['path/to/attachment.txt'],
+		'esp_MYESPACCOUNT',
+		'v2',
+        ['tag1', 'tag2'],
+        'en-US')
     puts result
 rescue => e
     puts "Error - #{e.class.name}: #{e.message}"
