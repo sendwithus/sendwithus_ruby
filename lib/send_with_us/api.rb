@@ -117,7 +117,7 @@ module SendWithUs
         payload[:locale] = options[:locale]
       end
 
-      if not options[:files].nil? and options[:files].any?
+      if options[:files] && options[:files].any?
         payload[:files] = []
 
         options[:files].each do |file_data|
@@ -183,7 +183,7 @@ module SendWithUs
     def start_on_drip_campaign(recipient_address, drip_campaign_id, email_data={}, locale=nil)
       payload = {recipient_address: recipient_address}
 
-      if not email_data.nil? and email_data.any?
+      if email_data && email_data.any?
         payload[:email_data] = email_data
       end
       if locale
@@ -222,7 +222,7 @@ module SendWithUs
 
       payload = {event_name: event_name}
 
-      if not revenue.nil?
+      if revenue
         payload[:revenue] = revenue
       end
 
@@ -246,7 +246,7 @@ module SendWithUs
     def customer_create(email, data = {})
       payload = {email: email}
 
-      if data.any?
+      if data && data.any?
         payload[:data] = data
       end
 
