@@ -19,7 +19,7 @@ module SendWithUs
     def get(endpoint)
       request(Net::HTTP::Get, request_path(endpoint))
     end
-    
+
     def delete(endpoint)
       request(Net::HTTP::Delete, request_path(endpoint))
     end
@@ -51,8 +51,7 @@ module SendWithUs
         when Net::HTTPForbidden then
           raise SendWithUs::ApiInvalidKey, "Invalid api key: #{@configuration.api_key}"
         when Net::HTTPBadRequest then
-          raise SendWithUs::ApiBadRequest,
-            "Bad request: \"#{path}\" with payload \"#{payload}\""
+          raise SendWithUs::ApiBadRequest.new("There was an error processing your request: #{@response.body}, with payload: #{payload}")
         when Net::HTTPSuccess
           puts @response.body if @configuration.debug
           @response

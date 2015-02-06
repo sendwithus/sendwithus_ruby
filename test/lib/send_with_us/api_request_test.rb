@@ -37,7 +37,9 @@ class TestApiRequest < MiniTest::Unit::TestCase
 
   def test_send_with_bad_request
     build_objects
-    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPBadRequest.new(1.0, 400, "OK"))
+    bad_request = Net::HTTPBadRequest.new(1.0, 400, 'OK')
+    bad_request.stubs(:body).returns("This is a test body")
+    Net::HTTP.any_instance.stubs(:request).returns(bad_request)
     assert_raises( SendWithUs::ApiBadRequest ) { @request.post(:send, @payload) }
   end
 
