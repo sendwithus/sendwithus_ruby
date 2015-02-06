@@ -130,9 +130,7 @@ module SendWithUs
         end
       end
 
-      payload = payload.to_json
-      puts payload
-      SendWithUs::ApiRequest.new(@configuration).post(:send, payload)
+      SendWithUs::ApiRequest.new(@configuration).post(:send, payload.to_json)
     end
 
     def drips_unsubscribe(email_address)
