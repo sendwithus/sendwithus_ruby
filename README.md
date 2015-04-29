@@ -145,7 +145,7 @@ begin
                 address: 'bcc@example.com' },
             { name: 'BCC2',
                 address: 'bcc2@example.com' }
-        ])
+        ],
         files: ['path/to/attachment.txt'],
         esp_account: 'esp_MYESPACCOUNT',
         version: 'v2',
