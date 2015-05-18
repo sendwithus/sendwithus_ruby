@@ -189,6 +189,7 @@ end
 - **email\_id** - *string* - Template ID being rendered
 - **version\_id** - *string* - Version ID to render (optional)
 - **data** - *hash* - Email data to render the template with (optional)
+- **data[:locale]** - *hash value* - This option specifies the locale to render (optional)
 
 ```ruby
 require 'rubygems'
