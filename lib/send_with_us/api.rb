@@ -149,14 +149,15 @@ module SendWithUs
     end
 
     def render(template_id, version_id = nil, template_data = {})
+      locale = template_data.delete(:locale)
+
       payload = {
         template_id: template_id,
         template_data: template_data,
       }
 
-      if version_id
-        payload[:version_id] = version_id
-      end
+      payload[:version_id] = version_id if version_id
+      payload[:locale] = locale if locale
 
       payload = payload.to_json
       SendWithUs::ApiRequest.new(@configuration).post(:'render', payload)
