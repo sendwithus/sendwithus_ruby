@@ -1,6 +1,6 @@
 require_relative '../../test_helper'
 
-class TestApiRequest < MiniTest::Unit::TestCase
+class TestApiRequest < Minitest::Test
 
   def build_objects
     @payload = {}
