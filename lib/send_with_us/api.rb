@@ -257,5 +257,26 @@ module SendWithUs
       endpoint = "customers/#{email}"
       SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
     end
+
+    def logs(options = {})
+      endpoint = "logs"
+
+      payload = {}
+
+      payload[:count]       = options[:count]       unless options[:count].nil?
+      payload[:offset]      = options[:offset]      unless options[:offset].nil?
+      payload[:created_gt]  = options[:created_gt]  unless options[:created_gt].nil?
+      payload[:created_gte] = options[:created_gte] unless options[:created_gte].nil?
+      payload[:created_lt]  = options[:created_lt]  unless options[:created_lt].nil?
+      payload[:created_lte] = options[:created_lte] unless options[:created_lte].nil?
+
+      SendWithUs::ApiRequest.new(@configuration).get(endpoint, payload.to_json)
+    end
+
+    def log(log_id)
+      endpoint = "logs/#{log_id}"
+
+      SendWithUs::ApiRequest.new(@configuration).get(endpoint)
+    end
   end
 end
