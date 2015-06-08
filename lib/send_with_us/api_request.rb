@@ -1,9 +1,11 @@
+require_relative "error"
+
 module SendWithUs
-  class ApiInvalidEndpoint < StandardError; end
-  class ApiConnectionRefused < StandardError; end
-  class ApiBadRequest < StandardError; end
-  class ApiInvalidKey < StandardError; end
-  class ApiUnknownError < StandardError; end
+  class ApiInvalidEndpoint < Error; end
+  class ApiConnectionRefused < Error; end
+  class ApiBadRequest < Error; end
+  class ApiInvalidKey < Error; end
+  class ApiUnknownError < Error; end
 
   class ApiRequest
     attr_reader :response

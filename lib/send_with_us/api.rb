@@ -1,7 +1,8 @@
 require "base64"
+require_relative "error"
 
 module SendWithUs
-  class ApiNilEmailId < StandardError; end
+  class ApiNilEmailId < Error; end
 
   class Api
     attr_reader :configuration
