@@ -1,3 +1,4 @@
+1.10.1 - tag support, error base class, logs method
 1.9.0 - Locale support.  Introduce send_email().  Deprecate send_with().
 1.8.0 - Tags support for send_with
 1.7.0 - 

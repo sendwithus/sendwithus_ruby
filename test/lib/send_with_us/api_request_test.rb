@@ -260,4 +260,10 @@ class TestApiRequest < Minitest::Test
     assert_instance_of( Net::HTTPSuccess, @request.delete(:'customers/#{@customer[:email]}'))
   end
 
+  def test_logs_with_options()
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.get(:'logs?count=2&offset=10'))
+  end
+
 end

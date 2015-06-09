@@ -309,6 +309,20 @@ Take a look at our Mailer that you can use to replace ActionMailer
 [sendwithus_ruby_action_mailer](https://github.com/sendwithus/sendwithus_ruby_action_mailer)
 
 
+## Logs
+
+Optional Arguments:
+- **count** – The number of logs to return. _Max: 100, Default: 100._
+- **offset** – Offset the number of logs to return. _Default: 0_
+- **created_gt** – Return logs created strictly after the given UTC timestamp.
+- **created_gte** – Return logs created on or after the given UTC timestamp.
+- **created_lt** – Return logs created strictly before the given UTC timestamp.
+- **created_lte** – Return logs created on or before the given UTC timestamp.
+
+```ruby
+obj.logs(count: 1, offset: 1)
+```
+
 ## Errors
 
 The following errors may be generated:

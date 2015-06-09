@@ -25,16 +25,9 @@ describe SendWithUs::Api do
   describe '#logs' do
     describe 'without options' do
       let(:options) { nil }
-      before { SendWithUs::ApiRequest.any_instance.expects(:get).with('logs', {}.to_json) }
+      before { SendWithUs::ApiRequest.any_instance.expects(:get).with('logs') }
 
       it { subject.logs }
-    end
-
-    describe 'with options' do
-      let(:options) { {count: 2, offset: 10} }
-      before { SendWithUs::ApiRequest.any_instance.expects(:get).with('logs', options.to_json) }
-
-      it { subject.logs(options) }
     end
   end
 

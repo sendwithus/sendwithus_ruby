@@ -261,16 +261,21 @@ module SendWithUs
     def logs(options = {})
       endpoint = "logs"
 
-      payload = {}
+      params = {}
 
-      payload[:count]       = options[:count]       unless options[:count].nil?
-      payload[:offset]      = options[:offset]      unless options[:offset].nil?
-      payload[:created_gt]  = options[:created_gt]  unless options[:created_gt].nil?
-      payload[:created_gte] = options[:created_gte] unless options[:created_gte].nil?
-      payload[:created_lt]  = options[:created_lt]  unless options[:created_lt].nil?
-      payload[:created_lte] = options[:created_lte] unless options[:created_lte].nil?
+      params[:count]       = options[:count]       unless options[:count].nil?
+      params[:offset]      = options[:offset]      unless options[:offset].nil?
+      params[:created_gt]  = options[:created_gt]  unless options[:created_gt].nil?
+      params[:created_gte] = options[:created_gte] unless options[:created_gte].nil?
+      params[:created_lt]  = options[:created_lt]  unless options[:created_lt].nil?
+      params[:created_lte] = options[:created_lte] unless options[:created_lte].nil?
 
-      SendWithUs::ApiRequest.new(@configuration).get(endpoint, payload.to_json)
+      if params.nil?
+        params = URI.encode_www_form(params)
+        endpoint = endpoint + "?" + params
+      end
+
+      SendWithUs::ApiRequest.new(@configuration).get(endpoint)
     end
 
     def log(log_id)
