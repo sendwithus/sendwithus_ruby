@@ -1,6 +1,6 @@
 require_relative '../../test_helper'
 
-class TestApiRequest < MiniTest::Unit::TestCase
+class TestApiRequest < Minitest::Test
 
   def build_objects
     @payload = {}
@@ -195,6 +195,12 @@ class TestApiRequest < MiniTest::Unit::TestCase
     assert_instance_of( Net::HTTPSuccess, @request.get(:'drip_campaigns') )
   end
 
+  def test_get_with_params_for_logs
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.get(:'logs', {count: 10}.to_json) )
+  end
+
   def test_start_on_drip_campaign
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
@@ -252,6 +258,12 @@ class TestApiRequest < MiniTest::Unit::TestCase
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
     assert_instance_of( Net::HTTPSuccess, @request.delete(:'customers/#{@customer[:email]}'))
+  end
+
+  def test_logs_with_options()
+    build_objects
+    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
+    assert_instance_of( Net::HTTPSuccess, @request.get(:'logs?count=2&offset=10'))
   end
 
 end

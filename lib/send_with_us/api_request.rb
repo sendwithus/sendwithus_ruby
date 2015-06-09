@@ -18,8 +18,8 @@ module SendWithUs
       request(Net::HTTP::Post, request_path(endpoint), payload)
     end
 
-    def get(endpoint)
-      request(Net::HTTP::Get, request_path(endpoint))
+    def get(endpoint, payload = nil)
+      request(Net::HTTP::Get, request_path(endpoint), payload)
     end
 
     def delete(endpoint)

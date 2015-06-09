@@ -1,6 +1,6 @@
 require_relative '../../test_helper'
 
-class TestConfig < MiniTest::Unit::TestCase
+class TestConfig < Minitest::Test
 
   def test_class_defaults
     assert_equal( false, SendWithUs::Config.defaults.empty? )

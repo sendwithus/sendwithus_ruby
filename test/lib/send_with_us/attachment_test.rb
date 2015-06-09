@@ -1,6 +1,6 @@
 require_relative '../../test_helper'
 
-class TestAttachment < MiniTest::Unit::TestCase
+class TestAttachment < Minitest::Test
   describe "#filename" do
     describe "when a filename is explicitly declared" do
       before do
