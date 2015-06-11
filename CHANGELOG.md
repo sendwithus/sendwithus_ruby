@@ -1,16 +1,17 @@
+1.10.2 - include render parameter on locale
 1.10.1 - tag support, error base class, logs method
-1.9.0 - Locale support.  Introduce send_email().  Deprecate send_with().
-1.8.0 - Tags support for send_with
-1.7.0 - 
-1.6.0 - 
-1.5.0 - 
+1.9.0 - Locale support.  Introduce send\_email().  Deprecate send\_with().
+1.8.0 - Tags support for send\_with
+1.7.0 -
+1.6.0 -
+1.5.0 -
 1.4.3 - Add customer add/deletion support
 1.1.4 - Add Drips v2.0 support
 1.0.5 - Add attachment support
 1.0.4 - Add drip campaign unsubscribe support
-1.0.3 - Don't allow nil email_id
+1.0.3 - Don't allow nil email\_id
 1.0.2 - More sensible error messages
-1.0.0 - Updated for v1_0 of SWU api. Added emails endpoint.
+1.0.0 - Updated for v1\_0 of SWU api. Added emails endpoint.
 0.0.4 - Rewritten to be more gem-like
       - Accepts configuration via a Rails-style initializer
       - Test coverage
