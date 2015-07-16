@@ -285,5 +285,44 @@ module SendWithUs
 
       SendWithUs::ApiRequest.new(@configuration).get(endpoint)
     end
+
+    def templates(options = {})
+      endpoint = "templates"
+
+      SendWithUs::ApiRequest.new(@configuration).get(endpoint)
+    end
+
+    def delete_template(template_id)
+      endpoint = "templates/#{template_id}"
+      SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
+    end
+
+    def list_template_versions(template_id)
+      endpoint = "templates/#{template_id}/versions"
+      SendWithUs::ApiRequest.new(@configuration).get(endpoint)
+    end
+
+    def update_template_version(template_id, version_id, name, subject, html, text)
+      payload = {
+        name: name,
+        subject: subject,
+        html: html,
+        text: text
+      }
+
+      endpoint = "templates/#{template_id}/versions/#{version_id}"
+      SendWithUs::ApiRequest.new(@configuration).put(endpoint, payload.to_json)
+    end
+
+    def create_template_version(template_id, name, subject, html, text)
+      payload = {
+        name: name,
+        subject: subject,
+        html: html,
+        text: text
+      }
+      endpoint = "templates/#{template_id}/versions"
+      SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload.to_json)
+    end
   end
 end
