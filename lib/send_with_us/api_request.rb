@@ -26,6 +26,11 @@ module SendWithUs
       request(Net::HTTP::Delete, request_path(endpoint))
     end
 
+    def put(endpoint, payload)
+      request(Net::HTTP::Put, request_path(endpoint), payload)
+    end
+
+
     private
 
       def request_path(end_point)
