@@ -1,3 +1,4 @@
+1.11.0 - add template create/update methods as well as group create/update methods
 1.10.2 - include render parameter on locale
 1.10.1 - tag support, error base class, logs method
 1.9.0 - Locale support.  Introduce send\_email().  Deprecate send\_with().

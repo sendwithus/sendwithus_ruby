@@ -225,7 +225,7 @@ rescue => e
 end
 ```
 
-### Using Drips 2.0
+### Using Drip Campaigns
 
 ```ruby
 require 'rubygems'
@@ -269,6 +269,18 @@ result = obj.customer_create("visha@example.com", customer_data)
 result = obj.customer_delete("visha@example.com")
 ```
 
+### Add customer to group
+
+```ruby
+obj.customer\_add\_to\_group(\email_address, group_id)
+```
+
+### Remove customer from group
+
+```ruby
+obj.customer\_remove\_from\_group(email\_address, group_id)
+```
+
 ### Customer Conversion Event
 You can use the Conversion API to track conversion and revenue data events against your sent emails
 
@@ -280,6 +292,52 @@ obj.customer_conversion('customer@example.com', 10050)
 
 # Without Revenue
 obj.customer_conversion('customer@example.com')
+```
+
+## Templates
+
+```ruby
+
+# List Templates
+obj.list\_templates() # Alternatively, obj.emails()
+
+# Create Template
+obj.create\_template(name, subject, html, text)
+
+# Delete Template
+obj.delete\_template(template\_id)
+
+# List Template Versions
+obj.list\_template\_versions(template\_id)
+
+# Update Template Version
+obj.update\_template\_version(template\_id, version\_id, name, subject, html, text)
+
+# Create Template Version
+obj.create\_template\_version(template\_id, name, subject, html, text)
+
+```
+
+
+## Groups
+
+Groups are another way to "tag" customers in sendwithus. They can be thought of as lists.
+
+
+```ruby
+# List groups
+obj.get_groups()
+
+# Create group
+obj.create\_customer\_group(name, description)
+
+# Update group
+obj.update\_customer\_group(group_id, new\_name, new\_description)
+
+# Delete group
+
+obj.delete_group(group_id)
+
 ```
 
 ## Rails

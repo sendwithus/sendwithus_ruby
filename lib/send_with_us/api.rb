@@ -149,6 +149,8 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).get(:emails)
     end
 
+    alias list_templates emails
+
     def render(template_id, version_id = nil, template_data = {})
       locale = template_data.delete(:locale)
 
@@ -255,8 +257,20 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload)
     end
 
-    def customer_delete(email)
-      endpoint = "customers/#{email}"
+    def customer_delete(email_address)
+      endpoint = "customers/#{email_address}"
+      SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
+    end
+
+    def customer_add_to_group(email_address, group_id)
+      payload = nil
+
+      endpoint = "customers/#{email_address})/groups/#{group_id}"
+      SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload)
+    end
+
+    def customer_remove_from_group()
+      endpoint = "customers/#{email_address})/groups/#{group_id}"
       SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
     end
 
@@ -284,6 +298,75 @@ module SendWithUs
       endpoint = "logs/#{log_id}"
 
       SendWithUs::ApiRequest.new(@configuration).get(endpoint)
+    end
+
+    def delete_template(template_id)
+      endpoint = "templates/#{template_id}"
+      SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
+    end
+
+    def list_template_versions(template_id)
+      endpoint = "templates/#{template_id}/versions"
+      SendWithUs::ApiRequest.new(@configuration).get(endpoint)
+    end
+
+    def get_template_version(template_id, version_id)
+      endpoint = "templates/#{template_id}/versions/#{version_id}"
+      SendWithUs::ApiRequest.new(@configuration).get(endpoint)
+    end
+
+    def update_template_version(template_id, version_id, name, subject, html, text)
+      payload = {
+        name: name,
+        subject: subject,
+        html: html,
+        text: text
+      }
+
+      endpoint = "templates/#{template_id}/versions/#{version_id}"
+      SendWithUs::ApiRequest.new(@configuration).put(endpoint, payload.to_json)
+    end
+
+    def create_template_version(template_id, name, subject, html, text)
+      payload = {
+        name: name,
+        subject: subject,
+        html: html,
+        text: text
+      }
+
+      endpoint = "templates/#{template_id}/versions"
+      SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload.to_json)
+    end
+
+    def get_groups()
+      endpoint = "groups"
+      SendWithUs::ApiRequest.new(@configuration).get(endpoint)
+    end
+
+    def create_customer_group(name, description = '')
+      payload = {
+        name: name,
+        description: description
+      }
+
+      endpoint = "groups"
+      SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload.to_json)
+    end
+
+    def update_customer_group(group_id, name = '', description = '')
+      payload = {
+        name: name,
+        description: description
+      }
+
+      endpoint = "groups/#{group_id}"
+      SendWithUs::ApiRequest.new(@configuration).put(endpoint, payload.to_json)
+    end
+
+    def delete_customer_group(group_id)
+      endpoint = "groups/#{group_id}"
+      SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
     end
   end
 end
