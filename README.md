@@ -272,13 +272,13 @@ result = obj.customer_delete("visha@example.com")
 ### Add customer to group
 
 ```ruby
-obj.customer\_add\_to\_group(\email_address, group_id)
+obj.customer_add_to_group(email_address, group_id)
 ```
 
 ### Remove customer from group
 
 ```ruby
-obj.customer\_remove\_from\_group(email\_address, group_id)
+obj.customer_remove_from_group(email_address, group_id)
 ```
 
 ### Customer Conversion Event
@@ -299,22 +299,22 @@ obj.customer_conversion('customer@example.com')
 ```ruby
 
 # List Templates
-obj.list\_templates() # Alternatively, obj.emails()
+obj.list_templates() # Alternatively, obj.emails()
 
 # Create Template
-obj.create\_template(name, subject, html, text)
+obj.create_template(name, subject, html, text)
 
 # Delete Template
-obj.delete\_template(template\_id)
+obj.delete_template(template_id)
 
 # List Template Versions
-obj.list\_template\_versions(template\_id)
+obj.list_template_versions(template_id)
 
 # Update Template Version
-obj.update\_template\_version(template\_id, version\_id, name, subject, html, text)
+obj.update_template_version(template_id, version_id, name, subject, html, text)
 
 # Create Template Version
-obj.create\_template\_version(template\_id, name, subject, html, text)
+obj.create_template_version(template_id, name, subject, html, text)
 
 ```
 
@@ -329,10 +329,10 @@ Groups are another way to "tag" customers in sendwithus. They can be thought of 
 obj.get_groups()
 
 # Create group
-obj.create\_customer\_group(name, description)
+obj.create_customer_group(name, description)
 
 # Update group
-obj.update\_customer\_group(group_id, new\_name, new\_description)
+obj.update_customer_group(group_id, new_name, new_description)
 
 # Delete group
 
