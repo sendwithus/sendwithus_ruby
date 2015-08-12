@@ -265,7 +265,7 @@ module SendWithUs
     def customer_add_to_group(email_address, group_id)
       payload = nil
 
-      endpoint = "customers/#{email_address})/groups/#{group_id}"
+      endpoint = "customers/#{email_address}/groups/#{group_id}"
       SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload)
     end
 
