@@ -1,3 +1,4 @@
+1.11.2 - fix bug in logs method where options weren't being respected
 1.11.1 - fix typo in group method
 1.11.0 - add template create/update methods as well as group create/update methods
 1.10.2 - include render parameter on locale
