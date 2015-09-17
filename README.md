@@ -217,7 +217,7 @@ require 'send_with_us'
 begin
     obj = SendWithUs::Api.new( api_key: 'YOUR API KEY', debug: true )
 
-    result = obj.drip_unsubscribe('customer@example.com')
+    result = obj.drips_unsubscribe('customer@example.com')
 
     puts result
 rescue => e
