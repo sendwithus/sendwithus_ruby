@@ -269,8 +269,8 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload)
     end
 
-    def customer_remove_from_group()
-      endpoint = "customers/#{email_address})/groups/#{group_id}"
+    def customer_remove_from_group(email_address, group_id)
+      endpoint = "customers/#{email_address}/groups/#{group_id}"
       SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
     end
 
