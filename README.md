@@ -335,7 +335,6 @@ obj.create_customer_group(name, description)
 obj.update_customer_group(group_id, new_name, new_description)
 
 # Delete group
-
 obj.delete_customer_group(group_id)
 
 ```
