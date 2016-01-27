@@ -1,3 +1,4 @@
+1.11.4 - added optional parameters to customer_create
 1.11.3 - fix bug in customer remove method where arguments were empty
 1.11.2 - fix bug in logs method where options weren't being respected
 1.11.1 - fix typo in group method
