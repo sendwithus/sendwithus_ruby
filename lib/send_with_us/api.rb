@@ -245,12 +245,12 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload)
     end
 
-    def customer_create(email, data = {})
+    def customer_create(email, data = {}, locale = nil, groups = [])
       payload = {email: email}
 
-      if data && data.any?
-        payload[:data] = data
-      end
+      payload[:data] = data if data && data.any?
+      payload[:locale] = locale if locale
+      payload[:groups] = groups if groups && groups.any?
 
       payload = payload.to_json
       endpoint = "customers"
