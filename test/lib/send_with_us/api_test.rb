@@ -43,4 +43,31 @@ describe SendWithUs::Api do
       it { -> { subject.log }.must_raise ArgumentError }
     end
   end
+
+  describe '#start_on_drip_campaign' do
+    let(:email) { 'some@email.stub' }
+    let(:drip_campaign_id) { 'dc_SoMeCampaIGnID' }
+    let(:tags) { ['some_tag'] }
+    let(:endpoint) { "drip_campaigns/#{drip_campaign_id}/activate" }
+
+    before { SendWithUs::ApiRequest.any_instance.expects(:post).with(endpoint, payload.to_json) }
+
+    describe 'email_data' do
+      let(:payload) { {recipient_address: email, email_data: {foo: 'bar'}} }
+
+      it { subject.start_on_drip_campaign(email, drip_campaign_id, {foo: 'bar'}) }
+    end
+
+    describe 'email_data & tags' do
+      let(:payload) { {recipient_address: email, email_data: {foo: 'bar'}, tags: tags} }
+
+      it { subject.start_on_drip_campaign(email, drip_campaign_id, {foo: 'bar', tags: tags}) }
+    end
+
+    describe 'tags' do
+      let(:payload) { {recipient_address: email, tags: tags} }
+
+      it { subject.start_on_drip_campaign(email, drip_campaign_id, {tags: tags}) }
+    end
+  end
 end

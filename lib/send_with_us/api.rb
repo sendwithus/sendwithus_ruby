@@ -186,7 +186,9 @@ module SendWithUs
       payload = {recipient_address: recipient_address}
 
       if email_data && email_data.any?
-        payload[:email_data] = email_data
+        tags = email_data.delete(:tags)
+        payload[:email_data] = email_data if email_data.any?
+        payload[:tags] = tags if tags
       end
       if locale
         payload[:locale] = locale
