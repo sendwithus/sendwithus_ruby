@@ -245,7 +245,13 @@ begin
     puts result
 
     # Add customer@example.com to campaign dc_asdf1234
-    result = obj.start_on_drip_campaign('customer@example.com', 'dc_asdf1234', {location: 'Canada', total: '100.00', tags: ['tag']})
+    result = obj.start_on_drip_campaign('customer@example.com', 'dc_asdf1234')
+    puts result
+
+    OR
+
+    # Add customer@example.com to campaign dc_asdf1234, with optional: email_data, locale, tags
+    result = obj.start_on_drip_campaign('customer@example.com', 'dc_asdf1234', {total: '100.00'}, 'en-US', ['tag1', 'tag2'])
     puts result
 
     # Remove customer@example.com from campaign dc_asdf1234

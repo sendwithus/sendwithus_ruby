@@ -47,7 +47,8 @@ describe SendWithUs::Api do
   describe '#start_on_drip_campaign' do
     let(:email) { 'some@email.stub' }
     let(:drip_campaign_id) { 'dc_SoMeCampaIGnID' }
-    let(:tags) { ['some_tag'] }
+    let(:locale) { "en-US" }
+    let(:tags) { ['tag1', 'tag2'] }
     let(:endpoint) { "drip_campaigns/#{drip_campaign_id}/activate" }
 
     before { SendWithUs::ApiRequest.any_instance.expects(:post).with(endpoint, payload.to_json) }
@@ -59,15 +60,15 @@ describe SendWithUs::Api do
     end
 
     describe 'email_data & tags' do
-      let(:payload) { {recipient_address: email, email_data: {foo: 'bar'}, tags: tags} }
+      let(:payload) { {recipient_address: email, email_data: {foo: 'bar'}, tags: tags, locale: locale} }
 
-      it { subject.start_on_drip_campaign(email, drip_campaign_id, {foo: 'bar', tags: tags}) }
+      it { subject.start_on_drip_campaign(email, drip_campaign_id, {foo: 'bar'}, locale, tags) }
     end
 
     describe 'tags' do
-      let(:payload) { {recipient_address: email, tags: tags} }
+      let(:payload) { {recipient_address: email, tags: tags, locale: locale} }
 
-      it { subject.start_on_drip_campaign(email, drip_campaign_id, {tags: tags}) }
+      it { subject.start_on_drip_campaign(email, drip_campaign_id, {}, locale, tags) }
     end
   end
 end
