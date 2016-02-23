@@ -182,11 +182,14 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).get(:drip_campaigns)
     end
 
-    def start_on_drip_campaign(recipient_address, drip_campaign_id, email_data={}, locale=nil)
+    def start_on_drip_campaign(recipient_address, drip_campaign_id, email_data={}, locale=nil, tags=[])
       payload = {recipient_address: recipient_address}
 
       if email_data && email_data.any?
         payload[:email_data] = email_data
+      end
+      if tags.any?
+        payload[:tags] = tags
       end
       if locale
         payload[:locale] = locale
