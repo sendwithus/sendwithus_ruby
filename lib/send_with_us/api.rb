@@ -284,7 +284,8 @@ module SendWithUs
       params[:count]       = options[:count]       unless options[:count].nil?
       params[:created_gt]  = options[:created_gt]  unless options[:created_gt].nil?
       params[:created_lt]  = options[:created_lt]  unless options[:created_lt].nil?
-      if params.present?
+
+      unless params.empty?
         params   = URI.encode_www_form(params)
         endpoint = endpoint + '?' + params
       end
@@ -303,7 +304,7 @@ module SendWithUs
       params[:created_lt]  = options[:created_lt]  unless options[:created_lt].nil?
       params[:created_lte] = options[:created_lte] unless options[:created_lte].nil?
 
-      if params.present?
+      unless params.empty?
         params   = URI.encode_www_form(params)
         endpoint = endpoint + '?' + params
       end
