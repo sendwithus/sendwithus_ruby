@@ -289,6 +289,19 @@ obj.customer_add_to_group(email_address, group_id)
 obj.customer_remove_from_group(email_address, group_id)
 ```
 
+### Get logs for customer
+This will retrieve email logs for a customer.
+
+Optional Arguments:
+- **count** – The number of logs to return. _Max: 100, Default: 100._
+- **created_gt** – Return logs created strictly after the given UTC timestamp.
+- **created_lt** – Return logs created strictly before the given UTC timestamp.
+
+
+```ruby
+obj.customer_email_log('customer@example.com', count: 1)
+```
+
 ### Customer Conversion Event
 You can use the Conversion API to track conversion and revenue data events against your sent emails
 
