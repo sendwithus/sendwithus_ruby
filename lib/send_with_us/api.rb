@@ -277,10 +277,25 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
     end
 
-    def logs(options = {})
-      endpoint = "logs"
+    def customer_email_log(email_address, options = {})
+      endpoint = "customers/#{email_address}/logs"
+      params   = {}
 
-      params = {}
+      params[:count]       = options[:count]       unless options[:count].nil?
+      params[:created_gt]  = options[:created_gt]  unless options[:created_gt].nil?
+      params[:created_lt]  = options[:created_lt]  unless options[:created_lt].nil?
+
+      unless params.empty?
+        params   = URI.encode_www_form(params)
+        endpoint = endpoint + '?' + params
+      end
+
+      SendWithUs::ApiRequest.new(@configuration).get(endpoint)
+    end
+
+    def logs(options = {})
+      endpoint = 'logs'
+      params   = {}
 
       params[:count]       = options[:count]       unless options[:count].nil?
       params[:offset]      = options[:offset]      unless options[:offset].nil?
@@ -289,9 +304,9 @@ module SendWithUs
       params[:created_lt]  = options[:created_lt]  unless options[:created_lt].nil?
       params[:created_lte] = options[:created_lte] unless options[:created_lte].nil?
 
-      unless params
-        params = URI.encode_www_form(params)
-        endpoint = endpoint + "?" + params
+      unless params.empty?
+        params   = URI.encode_www_form(params)
+        endpoint = endpoint + '?' + params
       end
 
       SendWithUs::ApiRequest.new(@configuration).get(endpoint)

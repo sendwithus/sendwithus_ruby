@@ -29,6 +29,29 @@ describe SendWithUs::Api do
 
       it { subject.logs }
     end
+    describe 'with options' do
+      let(:options) { { count: 2 } }
+      before { SendWithUs::ApiRequest.any_instance.expects(:get).with('logs?count=2') }
+
+      it { subject.logs(options) }
+    end
+  end
+
+  describe '#customer_email_log' do
+    describe 'without options' do
+      let(:options) { nil }
+      let(:email) { 'some@email.stub' }
+      before { SendWithUs::ApiRequest.any_instance.expects(:get).with("customers/#{email}/logs") }
+
+      it { subject.customer_email_log(email) }
+    end
+    describe 'with options' do
+      let(:options) { { count: 2 } }
+      let(:email) { 'some@email.stub' }
+      before { SendWithUs::ApiRequest.any_instance.expects(:get).with("customers/#{email}/logs?count=2") }
+
+      it { subject.customer_email_log(email, options) }
+    end
   end
 
   describe '#log' do
