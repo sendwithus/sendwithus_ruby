@@ -248,6 +248,10 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload)
     end
 
+    def customer_get(email)
+      SendWithUs::ApiRequest.new(@configuration).get("customers/#{email}")
+    end
+
     def customer_create(email, data = {}, locale = nil, groups = [])
       payload = {email: email}
 

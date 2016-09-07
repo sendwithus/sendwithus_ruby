@@ -264,6 +264,12 @@ end
 
 ## Customers
 
+### Get a Customer
+
+```ruby
+customer = obj.customer_get("visha@example.com")
+```
+
 ### Create/Update a Customer
 
 ```ruby
