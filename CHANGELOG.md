@@ -1,11 +1,13 @@
-1.11.5 - added tags to drip campaign activations
-1.11.4 - added optional parameters to customer_create
-1.11.3 - fix bug in customer remove method where arguments were empty
-1.11.2 - fix bug in logs method where options weren't being respected
-1.11.1 - fix typo in group method
-1.11.0 - add template create/update methods as well as group create/update methods
-1.10.2 - include render parameter on locale
-1.10.1 - tag support, error base class, logs method
+1.13.0 - Add support to get customer details
+1.12.0 - Customer logs endpoint added and optional parameters for logs fixed when no options sent
+1.11.5 - Added tags to drip campaign activations
+1.11.4 - Added optional parameters to customer_create
+1.11.3 - Fix bug in customer remove method where arguments were empty
+1.11.2 - Fix bug in logs method where options weren't being respected
+1.11.1 - Fix typo in group method
+1.11.0 - Add template create/update methods as well as group create/update methods
+1.10.2 - Include render parameter on locale
+1.10.1 - Tag support, error base class, logs method
 1.9.0 - Locale support.  Introduce send\_email().  Deprecate send\_with().
 1.8.0 - Tags support for send\_with
 1.7.0 -
