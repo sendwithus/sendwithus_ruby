@@ -94,4 +94,11 @@ describe SendWithUs::Api do
       it { subject.start_on_drip_campaign(email, drip_campaign_id, {}, locale, tags) }
     end
   end
+
+  describe '#customer_get' do
+      let(:email) {'customer@example.com'}
+      before { SendWithUs::ApiRequest.any_instance.expects(:get).with("customers/#{email}") }
+
+      it { subject.customer_get(email) }
+  end
 end
