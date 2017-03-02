@@ -389,7 +389,7 @@ rescue => e
 end
 ```
 
-Take a look at our Mailer that you can use to replace ActionMailer
+Take a look at our Mailer that you can use similarly to ActionMailer
 
 [sendwithus_ruby_action_mailer](https://github.com/sendwithus/sendwithus_ruby_action_mailer)
 
@@ -419,6 +419,43 @@ SendWithUs::ApiBadRequest - the API request is invalid
 SendWithUs::ApiConnectionRefused - the target URI is probably incorrect
 SendWithUs::ApiUnknownError - an unhandled HTTP error occurred
 ```
+
+## Running tests
+Use [rake](https://github.com/ruby/rake) to run the tests:
+
+```sh
+$: rake
+```
+
+## Troubleshooting
+
+### General Troubleshooting
+
+-   Enable debug mode
+-   Make sure you're using the latest Ruby client
+-   Capture the response data and check your logs &mdash; often this will have the exact error
+
+### Enable Debug Mode
+
+Debug mode prints out the underlying request information as well as the data payload that gets sent to sendwithus. You will most likely find this information in your logs. To enable it, simply put `debug: true` as a parameter when instantiating the API object. Use the debug mode to compare the data payload getting sent to [sendwithus' API docs](https://www.sendwithus.com/docs/api "Official Sendwithus API Docs").
+
+```php
+obj = SendWithUs::Api.new( api_key: 'YOUR API KEY', debug: true )
+```
+
+### Response Ranges
+
+Sendwithus' API typically sends responses back in these ranges:
+
+-   2xx – Successful Request
+-   4xx – Failed Request (Client error)
+-   5xx – Failed Request (Server error)
+
+If you're receiving an error in the 400 response range follow these steps:
+
+-   Double check the data and ID's getting passed to Sendwithus
+-   Ensure your API key is correct
+-   Log and check the body of the response 
 
 
 ## Internal
