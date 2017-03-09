@@ -11,9 +11,9 @@ class TestApiRequest < Minitest::Test
       :drip_campaign_id => 'dc_Rmd7y5oUJ3tn86sPJ8ESCk',
       :drip_campaign_step_id => 'dcs_yaAMiZNWCLAEGw7GLjBuGY'
     }
-    @customer = { :email => 'steve@sendwithus.com',
-                  :groups => ['grp_wnCdAjBWGeBGDUzNwGiTKc']
-                }
+    @customer = {
+      :email => 'steve@sendwithus.com'
+    }
     @template = {
       :html => '<html><head></head><body>TEST</body></html>',
       :subject  => 'A test template',
@@ -325,54 +325,9 @@ class TestApiRequest < Minitest::Test
     assert_instance_of( Net::HTTPSuccess, @request.delete(:'customers/#{@customer[:email]}'))
   end
 
-  def test_customer_add_to_group
-    build_objects
-    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.post(:"customers/#{@customer[:email]})/groups/#{@customer[:email][0]}", @customer))
-  end
-
-  def test_customer_remove_from_group
-    build_objects
-    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.delete(:"customers/#{@customer[:email]})/groups/#{@customer[:email][0]}"))
-  end
-
   def test_logs_with_options
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
     assert_instance_of( Net::HTTPSuccess, @request.get(:'logs?count=2&offset=10'))
-  end
-
-  def test_get_groups
-    build_objects
-    result = @api.get_groups()
-
-    assert_instance_of( Net::HTTPOK, result )
-  end
-
-  def test_create_customer_group
-    build_objects
-    result = @api.create_customer_group('testing')
-    result_id = JSON.parse(result.body)["group"]["id"]
-
-    # clean up
-    @api.delete_customer_group(result_id)
-
-    assert_instance_of( Net::HTTPOK, result )
-  end
-
-  def test_update_customer_group
-    build_objects
-    result = @api.update_customer_group(@customer[:groups][0], 'test')
-    assert_instance_of( Net::HTTPOK, result )
-  end
-
-  def delete_customer_group
-    build_objects
-    new_group =  @api.create_customer_group('deleteme')
-    new_group_id = JSON.parse(new_group.body)["group"]["id"]
-    result = @api.delete_customer_group(new_group_id)
-
-    assert_instance_of( Net::HTTPOK, result )
   end
 end

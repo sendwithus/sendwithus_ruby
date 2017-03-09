@@ -283,18 +283,6 @@ result = obj.customer_create("visha@example.com", customer_data)
 result = obj.customer_delete("visha@example.com")
 ```
 
-### Add customer to group
-
-```ruby
-obj.customer_add_to_group(email_address, group_id)
-```
-
-### Remove customer from group
-
-```ruby
-obj.customer_remove_from_group(email_address, group_id)
-```
-
 ### Get logs for customer
 This will retrieve email logs for a customer.
 
@@ -345,26 +333,6 @@ obj.create_template_version(template_id, name, subject, html, text)
 
 ```
 
-
-## Groups
-
-Groups are another way to "tag" customers in sendwithus. They can be thought of as lists.
-
-
-```ruby
-# List groups
-obj.get_groups()
-
-# Create group
-obj.create_customer_group(name, description)
-
-# Update group
-obj.update_customer_group(group_id, new_name, new_description)
-
-# Delete group
-obj.delete_customer_group(group_id)
-
-```
 
 ## Rails
 
@@ -455,7 +423,7 @@ If you're receiving an error in the 400 response range follow these steps:
 
 -   Double check the data and ID's getting passed to Sendwithus
 -   Ensure your API key is correct
--   Log and check the body of the response 
+-   Log and check the body of the response
 
 
 ## Internal

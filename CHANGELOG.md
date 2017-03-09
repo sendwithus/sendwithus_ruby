@@ -1,3 +1,4 @@
+2.0.0 - Deprecate Customer Groups API
 1.13.0 - Add support to get customer details
 1.12.0 - Customer logs endpoint added and optional parameters for logs fixed when no options sent
 1.11.5 - Added tags to drip campaign activations

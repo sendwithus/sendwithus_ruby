@@ -252,12 +252,11 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).get("customers/#{email}")
     end
 
-    def customer_create(email, data = {}, locale = nil, groups = [])
+    def customer_create(email, data = {}, locale = nil)
       payload = {email: email}
 
       payload[:data] = data if data && data.any?
       payload[:locale] = locale if locale
-      payload[:groups] = groups if groups && groups.any?
 
       payload = payload.to_json
       endpoint = "customers"
@@ -266,18 +265,6 @@ module SendWithUs
 
     def customer_delete(email_address)
       endpoint = "customers/#{email_address}"
-      SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
-    end
-
-    def customer_add_to_group(email_address, group_id)
-      payload = nil
-
-      endpoint = "customers/#{email_address}/groups/#{group_id}"
-      SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload)
-    end
-
-    def customer_remove_from_group(email_address, group_id)
-      endpoint = "customers/#{email_address}/groups/#{group_id}"
       SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
     end
 
@@ -359,36 +346,6 @@ module SendWithUs
 
       endpoint = "templates/#{template_id}/versions"
       SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload.to_json)
-    end
-
-    def get_groups()
-      endpoint = "groups"
-      SendWithUs::ApiRequest.new(@configuration).get(endpoint)
-    end
-
-    def create_customer_group(name, description = '')
-      payload = {
-        name: name,
-        description: description
-      }
-
-      endpoint = "groups"
-      SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload.to_json)
-    end
-
-    def update_customer_group(group_id, name = '', description = '')
-      payload = {
-        name: name,
-        description: description
-      }
-
-      endpoint = "groups/#{group_id}"
-      SendWithUs::ApiRequest.new(@configuration).put(endpoint, payload.to_json)
-    end
-
-    def delete_customer_group(group_id)
-      endpoint = "groups/#{group_id}"
-      SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
     end
   end
 end
