@@ -221,33 +221,6 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}/step/#{drip_campaign_step_id}/customers")
     end
 
-    # DEPRECATED: Please use 'customer_conversion' instead.
-    def add_customer_event(customer, event_name, revenue=nil)
-      warn "[DEPRECATED] 'add_customer_event' is deprecated.  Please use 'customer_conversion' instead."
-
-      payload = {event_name: event_name}
-
-      if revenue
-        payload[:revenue] = revenue
-      end
-
-      payload = payload.to_json
-      endpoint = "customers/#{customer}/conversions"
-      SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload)
-    end
-
-    def customer_conversion(customer, revenue=nil)
-      payload = {}
-
-      if revenue
-        payload[:revenue] = revenue
-      end
-
-      payload = payload.to_json
-      endpoint = "customers/#{customer}/conversions"
-      SendWithUs::ApiRequest.new(@configuration).post(endpoint, payload)
-    end
-
     def customer_get(email)
       SendWithUs::ApiRequest.new(@configuration).get("customers/#{email}")
     end

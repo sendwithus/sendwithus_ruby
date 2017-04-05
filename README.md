@@ -274,7 +274,7 @@ customer = obj.customer_get("visha@example.com")
 
 ```ruby
 customer_data = {:FirstName => "Visha"}
-result = obj.customer_create("visha@example.com", customer_data)
+result = obj.customer_create("visha@example.com")
 ```
 
 ### Delete a Customer
@@ -294,19 +294,6 @@ Optional Arguments:
 
 ```ruby
 obj.customer_email_log('customer@example.com', count: 1)
-```
-
-### Customer Conversion Event
-You can use the Conversion API to track conversion and revenue data events against your sent emails
-
-**NOTE:** Revenue is in cents (eg. $100.50 = 10050)
-
-```ruby
-# With Revenue
-obj.customer_conversion('customer@example.com', 10050)
-
-# Without Revenue
-obj.customer_conversion('customer@example.com')
 ```
 
 ## Templates
