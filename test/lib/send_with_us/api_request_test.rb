@@ -301,18 +301,6 @@ class TestApiRequest < Minitest::Test
     assert_equal( true, @request.send(:request_path, :send) == '/api/v1_0/send' )
   end
 
-  def test_add_user_event
-    build_objects
-    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.post(:'customers/test@sendwithus.com/conversions', @payload))
-  end
-
-  def test_conversion_event
-    build_objects
-    Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
-    assert_instance_of( Net::HTTPSuccess, @request.post(:'customers/test@sendwithus.com/conversions', @payload))
-  end
-
   def test_customer_create
     build_objects
     Net::HTTP.any_instance.stubs(:request).returns(Net::HTTPSuccess.new(1.0, 200, "OK"))
