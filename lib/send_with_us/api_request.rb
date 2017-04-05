@@ -42,7 +42,7 @@ module SendWithUs
       end
 
       def request(method_klass, path, payload=nil)
-        request = method_klass.new(path, initheader = {'Content-Type' =>'application/json'})
+        request = method_klass.new(path, {'Content-Type' =>'application/json'})
         request.add_field('X-SWU-API-KEY', @configuration.api_key)
         request.add_field('X-SWU-API-CLIENT', @configuration.client_stub)
 
