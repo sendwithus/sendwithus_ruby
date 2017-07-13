@@ -74,14 +74,14 @@ class TestApiRequest < Minitest::Test
 
   def test_send_with_with_attachment
     build_objects
-    result = @api.send_with(
+    result = @api.send_email(
       @template[:id],
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
-      {data: 'I AM DATA'},
-      {name: 'sendwithus', address: 'matt@example.com'},
-      [],
-      [],
-      ['README.md']
+      data: {data: 'I AM DATA'},
+      from: {name: 'sendwithus', address: 'matt@example.com'},
+      cc: [],
+      bcc: [],
+      files: ['README.md']
     )
     assert_instance_of( Net::HTTPOK, result )
   end
@@ -89,16 +89,16 @@ class TestApiRequest < Minitest::Test
   def test_send_with_with_version
     build_objects
     email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
-    result = @api.send_with(
+    result = @api.send_email(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
-      {data: 'I AM DATA'},
-      {name: 'sendwithus', address: 'matt@example.com'},
-      [],
-      [],
-      [],
-      '',
-      'v2'
+      data: {data: 'I AM DATA'},
+      from: {name: 'sendwithus', address: 'matt@example.com'},
+      cc: [],
+      bcc: [],
+      files: [],
+      esp_account: '',
+      version_name: 'v2'
     )
     assert_instance_of( Net::HTTPOK, result )
   end
@@ -106,17 +106,17 @@ class TestApiRequest < Minitest::Test
   def test_send_with_with_headers
     build_objects
     email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
-    result = @api.send_with(
+    result = @api.send_email(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
-      {data: 'I AM DATA'},
-      {name: 'sendwithus', address: 'matt@example.com'},
-      [],
-      [],
-      [],
-      '',
-      'v2',
-      {'X-MY-HEADER' => 'foo'}
+      data: {data: 'I AM DATA'},
+      from: {name: 'sendwithus', address: 'matt@example.com'},
+      cc: [],
+      bcc: [],
+      files: [],
+      esp_account: '',
+      version_name: 'v2',
+      headers: {'X-MY-HEADER' => 'foo'}
     )
     assert_instance_of( Net::HTTPOK, result )
   end
@@ -124,18 +124,18 @@ class TestApiRequest < Minitest::Test
   def test_send_with_with_tags
     build_objects
     email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'
-    result = @api.send_with(
+    result = @api.send_email(
       email_id,
       {name: 'Ruby Unit Test', address: 'matt@example.com'},
-      {data: 'I AM DATA'},
-      {name: 'sendwithus', address: 'matt@example.com'},
-      [],
-      [],
-      [],
-      '',
-      'v2',
-      {},
-      ['tag1', 'tag2']
+      data: {data: 'I AM DATA'},
+      from: {name: 'sendwithus', address: 'matt@example.com'},
+      cc: [],
+      bcc: [],
+      files: [],
+      esp_account: '',
+      version_name: 'v2',
+      headers: {},
+      tags: ['tag1', 'tag2']
     )
     assert_instance_of( Net::HTTPOK, result )
   end
