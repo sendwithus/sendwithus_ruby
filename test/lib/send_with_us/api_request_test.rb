@@ -17,7 +17,7 @@ class TestApiRequest < Minitest::Test
     @template = {
       :html => '<html><head></head><body>TEST</body></html>',
       :subject  => 'A test template',
-      :name => 'Test Template',
+      :name => 'Test Template '.concat(Random.new.rand(100000).to_s),
       :id => 'test_fixture_1'
     }
   end
