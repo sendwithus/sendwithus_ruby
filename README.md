@@ -204,7 +204,8 @@ begin
     result = obj.render(
         'template_id',
         'version_id',
-        { company_name: 'TestCo' })
+        { company_name: 'TestCo' },
+		strict=true)
 
     puts result
 rescue => e

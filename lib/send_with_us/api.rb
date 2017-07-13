@@ -155,9 +155,9 @@ module SendWithUs
       locale = template_data.delete(:locale)
 
       payload = {
-        template_id: template_id,
+        template: template_id,
         template_data: template_data,
-        stict: strict,
+        strict: strict,
       }
 
       payload[:version_id] = version_id if version_id
