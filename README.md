@@ -192,6 +192,7 @@ end
 - **version\_id** - *string* - Version ID to render (optional)
 - **data** - *hash* - Email data to render the template with (optional)
 - **data[:locale]** - *hash value* - This option specifies the locale to render (optional)
+- **strict** - *bool* - This option enables strict mode and is disabled by default (optional)
 
 ```ruby
 require 'rubygems'
@@ -203,7 +204,7 @@ begin
     result = obj.render(
         'template_id',
         'version_id',
-        { company_name: 'TestCo' },
+        { company_name: 'TestCo' })
 
     puts result
 rescue => e
