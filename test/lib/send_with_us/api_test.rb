@@ -22,21 +22,6 @@ describe SendWithUs::Api do
     it('configs') { SendWithUs::Api.new( api_key: @custom_api_key ).configuration.api_key.must_equal @custom_api_key }
   end
 
-  describe '#logs' do
-    describe 'without options' do
-      let(:options) { nil }
-      before { SendWithUs::ApiRequest.any_instance.expects(:get).with('logs') }
-
-      it { subject.logs }
-    end
-    describe 'with options' do
-      let(:options) { { count: 2 } }
-      before { SendWithUs::ApiRequest.any_instance.expects(:get).with('logs?count=2') }
-
-      it { subject.logs(options) }
-    end
-  end
-
   describe '#customer_email_log' do
     describe 'without options' do
       let(:options) { nil }
