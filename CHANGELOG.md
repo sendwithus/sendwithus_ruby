@@ -1,3 +1,4 @@
+3.1.1 - remove old and unused methods
 3.1.0 - Add `strict` option to the render call
 3.0.0 - Deprecate and remove Conversions API calls
 2.0.0 - Deprecate Customer Groups API

@@ -214,14 +214,6 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}")
     end
 
-    def list_customers_on_campaign(drip_campaign_id)
-      SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}/customers")
-    end
-
-    def list_customers_on_campaign_step(drip_campaign_id, drip_campaign_step_id)
-      SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}/step/#{drip_campaign_step_id}/customers")
-    end
-
     def customer_get(email)
       SendWithUs::ApiRequest.new(@configuration).get("customers/#{email}")
     end
@@ -249,25 +241,6 @@ module SendWithUs
       params[:count]       = options[:count]       unless options[:count].nil?
       params[:created_gt]  = options[:created_gt]  unless options[:created_gt].nil?
       params[:created_lt]  = options[:created_lt]  unless options[:created_lt].nil?
-
-      unless params.empty?
-        params   = URI.encode_www_form(params)
-        endpoint = endpoint + '?' + params
-      end
-
-      SendWithUs::ApiRequest.new(@configuration).get(endpoint)
-    end
-
-    def logs(options = {})
-      endpoint = 'logs'
-      params   = {}
-
-      params[:count]       = options[:count]       unless options[:count].nil?
-      params[:offset]      = options[:offset]      unless options[:offset].nil?
-      params[:created_gt]  = options[:created_gt]  unless options[:created_gt].nil?
-      params[:created_gte] = options[:created_gte] unless options[:created_gte].nil?
-      params[:created_lt]  = options[:created_lt]  unless options[:created_lt].nil?
-      params[:created_lte] = options[:created_lte] unless options[:created_lte].nil?
 
       unless params.empty?
         params   = URI.encode_www_form(params)
