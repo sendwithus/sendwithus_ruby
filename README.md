@@ -214,6 +214,7 @@ end
 ```
 
 ### Remove Customer from Drip Campaign
+
 ```ruby
 require 'rubygems'
 require 'send_with_us'
@@ -285,23 +286,9 @@ result = obj.customer_create("visha@example.com")
 result = obj.customer_delete("visha@example.com")
 ```
 
-### Get logs for customer
-This will retrieve email logs for a customer.
-
-Optional Arguments:
-- **count** – The number of logs to return. _Max: 100, Default: 100._
-- **created_gt** – Return logs created strictly after the given UTC timestamp.
-- **created_lt** – Return logs created strictly before the given UTC timestamp.
-
-
-```ruby
-obj.customer_email_log('customer@example.com', count: 1)
-```
-
 ## Templates
 
 ```ruby
-
 # List Templates
 obj.list_templates() # Alternatively, obj.emails()
 
@@ -314,12 +301,14 @@ obj.delete_template(template_id)
 # List Template Versions
 obj.list_template_versions(template_id)
 
+# Get Template Version
+obj.get_template_version(template_id, version_id)
+
 # Update Template Version
 obj.update_template_version(template_id, version_id, name, subject, html, text)
 
 # Create Template Version
 obj.create_template_version(template_id, name, subject, html, text)
-
 ```
 
 
@@ -353,16 +342,24 @@ Take a look at our Mailer that you can use similarly to ActionMailer
 
 ## Logs
 
-Optional Arguments:
-- **count** – The number of logs to return. _Max: 100, Default: 100._
-- **offset** – Offset the number of logs to return. _Default: 0_
-- **created_gt** – Return logs created strictly after the given UTC timestamp.
-- **created_gte** – Return logs created on or after the given UTC timestamp.
-- **created_lt** – Return logs created strictly before the given UTC timestamp.
-- **created_lte** – Return logs created on or before the given UTC timestamp.
+### Get single log
+
+Used to get the details for a single log. The log ID can be obtained by recording the `receipt_id` value returned from the `send` call.
 
 ```ruby
-obj.logs(count: 1, offset: 1)
+obj.log('log_sld7xWJ3isc23-3')
+```
+
+### Get logs for customer
+This will retrieve email logs for a customer.
+
+Optional Arguments:
+- **count** – The number of logs to return. _Max: 100, Default: 100._
+- **created_gt** – Return logs created strictly after the given UTC timestamp.
+- **created_lt** – Return logs created strictly before the given UTC timestamp.
+
+```ruby
+obj.customer_email_log('customer@example.com', count: 1)
 ```
 
 ## Errors

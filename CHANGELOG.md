@@ -1,3 +1,4 @@
+4.0.1 - Remove unused methods
 4.0.0 - Deprecate Logs List API endpoint
 3.1.0 - Add `strict` option to the render call
 3.0.0 - Deprecate and remove Conversions API calls
