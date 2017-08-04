@@ -150,7 +150,7 @@ begin
         ],
         files: ['path/to/attachment.txt'],
         esp_account: 'esp_MYESPACCOUNT',
-        version: 'v2',
+        version_name: 'v2',
         tags: ['tag1', 'tag2'],
         locale: 'en-US')
     puts result
