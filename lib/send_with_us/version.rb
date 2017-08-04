@@ -1,3 +1,3 @@
 module SendWithUs
-  VERSION = '3.1.0'
+  VERSION = '4.0.1'
 end

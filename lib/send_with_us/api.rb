@@ -214,14 +214,6 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}")
     end
 
-    def list_customers_on_campaign(drip_campaign_id)
-      SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}/customers")
-    end
-
-    def list_customers_on_campaign_step(drip_campaign_id, drip_campaign_step_id)
-      SendWithUs::ApiRequest.new(@configuration).get("drip_campaigns/#{drip_campaign_id}/step/#{drip_campaign_step_id}/customers")
-    end
-
     def customer_get(email)
       SendWithUs::ApiRequest.new(@configuration).get("customers/#{email}")
     end
