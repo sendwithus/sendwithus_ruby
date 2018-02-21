@@ -86,6 +86,21 @@ class TestApiRequest < Minitest::Test
     assert_instance_of( Net::HTTPOK, result )
   end
 
+  def test_send_with_with_file
+    build_objects
+    result = @api.send_email(
+      @template[:id],
+      {name: 'Ruby Unit Test', address: 'matt@example.com'},
+      data: {data: 'I AM DATA'},
+      from: {name: 'sendwithus', address: 'matt@example.com'},
+      cc: [],
+      bcc: [],
+      files: [{data: Base64.encode64(open('README.md').read),
+               id: 'README.md'}]
+    )
+    assert_instance_of( Net::HTTPOK, result )
+  end
+
   def test_send_with_with_version
     build_objects
     email_id = 'tem_9YvYsaLW2Mw4tmPiLcVvpC'

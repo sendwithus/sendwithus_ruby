@@ -8,6 +8,7 @@ require 'uri'
 require 'json'
 
 require 'send_with_us/attachment'
+require 'send_with_us/file'
 require 'send_with_us/api'
 require 'send_with_us/api_request'
 require 'send_with_us/config'
