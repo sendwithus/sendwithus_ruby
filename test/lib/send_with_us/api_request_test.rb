@@ -86,7 +86,7 @@ class TestApiRequest < Minitest::Test
     assert_instance_of( Net::HTTPOK, result )
   end
 
-  def test_send_with_with_file
+  def test_send_email_with_file
     build_objects
     result = @api.send_email(
       @template[:id],
