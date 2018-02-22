@@ -119,15 +119,8 @@ module SendWithUs
       end
 
       if options[:files] && options[:files].any?
-        payload[:files] = []
-
-        options[:files].each do |file_data|
-          if file_data.is_a?(String)
-            attachment = SendWithUs::Attachment.new(file_data)
-          else
-            attachment = SendWithUs::Attachment.new(file_data[:attachment], file_data[:filename])
-          end
-          payload[:files] << { id: attachment.filename, data: attachment.encoded_data }
+        payload[:files] = options[:files].map do |file_data|
+          SendWithUs::File.new(file_data).to_h
         end
       end
 
