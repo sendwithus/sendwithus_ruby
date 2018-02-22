@@ -108,7 +108,8 @@ begin
           'path/to/file.txt',
           { filename: 'customfilename.txt', attachment: 'path/to/file.txt' },
           { filename: 'anotherfile.txt', attachment: File.open('path/to/file.txt') },
-          { filename: 'unpersistedattachment.txt', attachment: StringIO.new("raw data") }
+          { filename: 'unpersistedattachment.txt', attachment: StringIO.new("raw data") },
+          { id: "alreadyBase64EncodedFile", data: "aG9sYQ==\n" }
         ]
     )
     puts result
