@@ -1,3 +1,4 @@
+# coding: utf-8
 require_relative '../../test_helper'
 
 class TestApiRequest < Minitest::Test
@@ -72,6 +73,15 @@ class TestApiRequest < Minitest::Test
     assert_raises( SendWithUs::ApiConnectionRefused ) { @request.post(:send, @payload) }
   end
 
+  def test_send_email_with_unicode
+    build_objects
+    invalid_payload = {
+      template_id:  @template[:id],
+      recipient: {name: 'Ruby Unit Test', address: 'stéve@sendwitus.com'}
+    }.to_json    
+    assert_raises( SendWithUs::ApiBadRequest) { @request.post(:send, invalid_payload) }
+  end
+
   def test_send_with_with_attachment
     build_objects
     result = @api.send_email(
@@ -83,7 +93,7 @@ class TestApiRequest < Minitest::Test
       bcc: [],
       files: ['README.md']
     )
-    assert_instance_of( Net::HTTPOK, result )
+    assert_instance_of( Net::HTTPOK, result ) 
   end
 
   def test_send_email_with_file
