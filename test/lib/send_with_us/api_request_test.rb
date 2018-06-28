@@ -77,7 +77,7 @@ class TestApiRequest < Minitest::Test
     build_objects
     invalid_payload = {
       template_id:  @template[:id],
-      recipient: {name: 'Ruby Unit Test', address: 'stéve@sendwitus.com'}
+      recipient: {name: 'Ruby Unit Test', address: 'stéve@sendwithus.com'}
     }.to_json    
     assert_raises( SendWithUs::ApiBadRequest) { @request.post(:send, invalid_payload) }
   end
