@@ -58,12 +58,12 @@ module SendWithUs
         when Net::HTTPForbidden then
           raise SendWithUs::ApiInvalidKey, "Invalid api key: #{@configuration.api_key}"
         when Net::HTTPBadRequest then
-          raise SendWithUs::ApiBadRequest.new("There was an error processing your request: #{@response.body}, with payload: #{payload}".force_encoding('ASCII-8BIT'))
+          raise SendWithUs::ApiBadRequest.new("There was an error processing your request: #{@response.body.force_encoding('UTF-8')}, with payload: #{payload}")
         when Net::HTTPSuccess
           puts @response.body if @configuration.debug
           @response
         else
-          raise SendWithUs::ApiUnknownError, "A #{@response.code} error has occurred: '#{@response.message}'"
+          raise SendWithUs::ApiUnknownError, "A #{@response.code} error has occurred: '#{@response.message.force_encoding('UTF-8')}'"
         end
       rescue Errno::ECONNREFUSED
         raise SendWithUs::ApiConnectionRefused, 'The connection was refused'
