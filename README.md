@@ -363,6 +363,13 @@ Optional Arguments:
 obj.customer_email_log('customer@example.com', count: 1)
 ```
 
+### Get events for a single log
+This will retrieve the events and associated data for a specified log.
+
+```ruby
+obj.log_events('log_sld7xWJ3isc23-3')
+```
+
 ## Errors
 
 The following errors may be generated:

@@ -249,6 +249,12 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).get(endpoint)
     end
 
+    def log_events(log_id)
+      endpoint = "logs/#{log_id}/events"
+
+      SendWithUs::ApiRequest.new(@configuration).get(endpoint)
+    end
+    
     def delete_template(template_id)
       endpoint = "templates/#{template_id}"
       SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
