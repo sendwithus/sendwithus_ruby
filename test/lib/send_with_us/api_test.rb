@@ -52,6 +52,19 @@ describe SendWithUs::Api do
     end
   end
 
+  describe '#log/events' do
+    describe 'with log_id' do
+      let(:log_id) { 'log_TESTTEST123' }
+      before { SendWithUs::ApiRequest.any_instance.expects(:get).with("logs/#{log_id}/events") }
+
+      it { subject.log_events(log_id) }
+    end
+
+    describe 'without log_id' do
+      it { -> { subject.log }.must_raise ArgumentError }
+    end
+  end
+
   describe '#start_on_drip_campaign' do
     let(:email) { 'some@email.stub' }
     let(:drip_campaign_id) { 'dc_SoMeCampaIGnID' }

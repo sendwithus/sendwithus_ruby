@@ -1,3 +1,6 @@
+## 4.2.0
+- add a `log_events` method to get the events list on a Sendwithus log
+
 ## 4.1.1
 - Fix to encode responses as UTF-8
 
