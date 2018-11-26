@@ -214,7 +214,7 @@ rescue => e
 end
 ```
 
-### Remove Customer from Drip Campaign
+### Remove Customer from All Drip Campaigns
 
 ```ruby
 require 'rubygems'
