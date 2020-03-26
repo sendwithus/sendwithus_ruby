@@ -7,7 +7,7 @@ gemspec
 # Test Dependencies
 gem 'mocha',           '~> 1.1'
 gem 'i18n',            '~> 0.7'
-gem 'rake',            '~> 10.4'
+gem 'rake',            '~> 12.3.3'
 gem 'multi_json',      '~> 1.11'
 gem 'metaclass',       '~> 0.0.4'
 gem 'shoulda-context', '~> 1.2'

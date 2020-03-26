@@ -9,7 +9,7 @@ describe SendWithUs::Api do
       SendWithUs::Api.configure { |config| config.api_key = @initializer_api_key }
     end
 
-    it('configs') { SendWithUs::Api.new.configuration.api_key.must_equal @initializer_api_key }
+    it('configs') { _(SendWithUs::Api.new.configuration.api_key).must_equal @initializer_api_key }
   end
 
   describe '.configuration with custom' do
@@ -19,7 +19,7 @@ describe SendWithUs::Api do
       SendWithUs::Api.configure { |config| config.api_key = @initializer_api_key }
     end
 
-    it('configs') { SendWithUs::Api.new( api_key: @custom_api_key ).configuration.api_key.must_equal @custom_api_key }
+    it('configs') { _(SendWithUs::Api.new( api_key: @custom_api_key ).configuration.api_key).must_equal @custom_api_key }
   end
 
   describe '#customer_email_log' do
@@ -48,7 +48,7 @@ describe SendWithUs::Api do
     end
 
     describe 'without log_id' do
-      it { -> { subject.log }.must_raise ArgumentError }
+      it { expect { subject.log }.must_raise ArgumentError }
     end
   end
 
@@ -61,7 +61,7 @@ describe SendWithUs::Api do
     end
 
     describe 'without log_id' do
-      it { -> { subject.log }.must_raise ArgumentError }
+      it { expect { subject.log }.must_raise ArgumentError }
     end
   end
 

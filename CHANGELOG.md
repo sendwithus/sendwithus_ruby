@@ -1,3 +1,6 @@
+## 4.2.1
+- Bump `rake` version due to vulnerability 
+
 ## 4.2.0
 - add a `log_events` method to get the events list on a Sendwithus log
 
