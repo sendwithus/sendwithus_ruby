@@ -1,6 +1,6 @@
 # Sendwithus Ruby Client
 
-Ruby bindings for sending email via the (Sendwithus API)[https://support.sendwithus.com/api/].
+Ruby bindings for sending email via the [Sendwithus API](https://support.sendwithus.com/api/).
 
 [sendwithus.com](http://sendwithus.com)
 
