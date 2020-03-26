@@ -1,6 +1,6 @@
-# sendwithus_ruby
+# Sendwithus Ruby Client
 
-Ruby bindings for sending email via the sendwithus API.
+Ruby bindings for sending email via the (Sendwithus API)[https://support.sendwithus.com/api/].
 
 [sendwithus.com](http://sendwithus.com)
 
@@ -277,7 +277,6 @@ customer = obj.customer_get("visha@example.com")
 ### Create/Update a Customer
 
 ```ruby
-customer_data = {:FirstName => "Visha"}
 result = obj.customer_create("visha@example.com")
 ```
 
@@ -418,17 +417,3 @@ If you're receiving an error in the 400 response range follow these steps:
 -   Double check the data and ID's getting passed to Sendwithus
 -   Ensure your API key is correct
 -   Log and check the body of the response
-
-
-## Internal
-Build gem with
-
-```bash
-gem build send_with_us.gemspec
-```
-
-Publish gem with
-
-```bash
-gem push send_with_us-VERSION.gem
-```
