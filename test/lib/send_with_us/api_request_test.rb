@@ -19,7 +19,9 @@ class TestApiRequest < Minitest::Test
       :html => '<html><head></head><body>TEST</body></html>',
       :subject  => 'A test template',
       :name => 'Test Template '.concat(Random.new.rand(100000).to_s),
-      :id => 'test_fixture_1'
+      :id => 'test_fixture_1',
+      :preheader => 'Test preheader',
+      :amp_html => '<html><head></head><body>AMP HTML</body></html>'
     }
   end
 
@@ -78,7 +80,7 @@ class TestApiRequest < Minitest::Test
     invalid_payload = {
       template_id:  @template[:id],
       recipient: {name: 'Ruby Unit Test', address: 'stéve@sendwithus.com'}
-    }.to_json    
+    }.to_json
     assert_raises( SendWithUs::ApiBadRequest) { @request.post(:send, invalid_payload) }
   end
 
@@ -93,7 +95,7 @@ class TestApiRequest < Minitest::Test
       bcc: [],
       files: ['README.md']
     )
-    assert_instance_of( Net::HTTPOK, result ) 
+    assert_instance_of( Net::HTTPOK, result )
   end
 
   def test_send_email_with_file
@@ -247,6 +249,24 @@ class TestApiRequest < Minitest::Test
     assert_instance_of( Net::HTTPOK, result )
   end
 
+  def test_update_template_version_with_optional_fields
+    build_objects
+    version_id = get_first_template_version_id(@template[:id])
+
+    result = @api.update_template_version(
+      @template[:id],
+      version_id,
+      @template[:name],
+      @template[:subject],
+      @template[:html],
+      'sample text payload',
+      preheader=@template[:preheader],
+      amp_html=@template[:amp_html]
+    )
+
+    assert_instance_of( Net::HTTPOK, result )
+  end
+
   def test_create_template_version
     build_objects
     result = @api.create_template_version(
@@ -255,6 +275,21 @@ class TestApiRequest < Minitest::Test
       @template[:subject],
       @template[:html],
       ''
+    )
+
+    assert_instance_of( Net::HTTPOK, result )
+  end
+
+  def test_create_template_version_with_optional_fields
+    build_objects
+    result = @api.create_template_version(
+      @template[:id],
+      @template[:name],
+      @template[:subject],
+      @template[:html],
+      'sample text payload',
+      preheader=@template[:preheader],
+      amp_html=@template[:amp_html]
     )
 
     assert_instance_of( Net::HTTPOK, result )
