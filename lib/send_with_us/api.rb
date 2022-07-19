@@ -160,12 +160,14 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).post(:'render', payload)
     end
 
-    def create_template(name, subject, html, text)
+    def create_template(name, subject, html, text, preheader='', amp_html='')
       payload = {
         name: name,
         subject: subject,
         html: html,
-        text: text
+        text: text,
+        preheader: preheader,
+        amp_html: amp_html
       }
 
       payload = payload.to_json
@@ -254,7 +256,7 @@ module SendWithUs
 
       SendWithUs::ApiRequest.new(@configuration).get(endpoint)
     end
-    
+
     def delete_template(template_id)
       endpoint = "templates/#{template_id}"
       SendWithUs::ApiRequest.new(@configuration).delete(endpoint)
@@ -270,24 +272,28 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).get(endpoint)
     end
 
-    def update_template_version(template_id, version_id, name, subject, html, text)
+    def update_template_version(template_id, version_id, name, subject, html, text, preheader='', amp_html='')
       payload = {
         name: name,
         subject: subject,
         html: html,
-        text: text
+        text: text,
+        preheader: preheader,
+        amp_html: amp_html
       }
 
       endpoint = "templates/#{template_id}/versions/#{version_id}"
       SendWithUs::ApiRequest.new(@configuration).put(endpoint, payload.to_json)
     end
 
-    def create_template_version(template_id, name, subject, html, text)
+    def create_template_version(template_id, name, subject, html, text, preheader='', amp_html='')
       payload = {
         name: name,
         subject: subject,
         html: html,
-        text: text
+        text: text,
+        preheader: preheader,
+        amp_html: amp_html
       }
 
       endpoint = "templates/#{template_id}/versions"
