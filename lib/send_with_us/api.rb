@@ -145,7 +145,7 @@ module SendWithUs
     alias list_templates emails
 
     def render(template_id, version_id = nil, template_data = {}, strict = false)
-      locale = template_data.delete(:locale)
+      locale = template_data[:locale]
 
       payload = {
         template: template_id,
