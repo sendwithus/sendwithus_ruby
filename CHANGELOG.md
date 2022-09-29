@@ -1,3 +1,6 @@
+## 4.4.0
+- **[#88](https://github.com/sendwithus/sendwithus_ruby/pull/88) Fix problematic `render` implementation.** `template_data` serves two purposes, defining template data and specifying the optional API parameter for `locale`. Previously, `locale` would be stripped out of `template_data` in the API request, preventing users from specifying variables named `locale` in their own template data.
+
 ## 4.3.0
 - Add optional `preheader` and `amp_html` fields to template calls
 
