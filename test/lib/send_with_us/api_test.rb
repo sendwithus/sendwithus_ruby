@@ -99,4 +99,26 @@ describe SendWithUs::Api do
 
       it { subject.customer_get(email) }
   end
+
+  describe '#render' do
+    let(:locale) { 'fr-CA' }
+    let(:template_id) { 'template-id' }
+    let(:template_data) { { foo: 'bar', locale: locale } }
+    let(:strict) { true }
+    let(:version_id) { 'some-version-id' }
+
+    let(:payload) do
+      {
+        template: template_id,
+        template_data: template_data,
+        strict: strict,
+        version_id: version_id,
+        locale: locale,
+      }
+    end
+
+    before { SendWithUs::ApiRequest.any_instance.expects(:post).with(:render, payload.to_json) }
+
+    it { subject.render(template_id, version_id, template_data, strict) }
+  end
 end
