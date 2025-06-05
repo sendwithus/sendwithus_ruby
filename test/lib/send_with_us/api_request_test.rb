@@ -21,7 +21,8 @@ class TestApiRequest < Minitest::Test
       :name => 'Test Template '.concat(Random.new.rand(100000).to_s),
       :id => 'test_fixture_1',
       :preheader => 'Test preheader',
-      :amp_html => '<html><head></head><body>AMP HTML</body></html>'
+      :amp_html => '<html><head></head><body>AMP HTML</body></html>',
+      :template_data => {data: 'I AM DATA'}
     }
   end
 
@@ -261,7 +262,8 @@ class TestApiRequest < Minitest::Test
       @template[:html],
       'sample text payload',
       preheader=@template[:preheader],
-      amp_html=@template[:amp_html]
+      amp_html=@template[:amp_html],
+      template_data=@template[:template_data]
     )
 
     assert_instance_of( Net::HTTPOK, result )
@@ -289,7 +291,8 @@ class TestApiRequest < Minitest::Test
       @template[:html],
       'sample text payload',
       preheader=@template[:preheader],
-      amp_html=@template[:amp_html]
+      amp_html=@template[:amp_html],
+      template_data=@template[:template_data]
     )
 
     assert_instance_of( Net::HTTPOK, result )
