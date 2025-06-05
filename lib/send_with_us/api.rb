@@ -160,14 +160,15 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).post(:'render', payload)
     end
 
-    def create_template(name, subject, html, text, preheader='', amp_html='')
+    def create_template(name, subject, html, text, preheader='', amp_html='', template_data={})
       payload = {
         name: name,
         subject: subject,
         html: html,
         text: text,
         preheader: preheader,
-        amp_html: amp_html
+        amp_html: amp_html,
+        template_data: template_data
       }
 
       payload = payload.to_json
@@ -272,28 +273,30 @@ module SendWithUs
       SendWithUs::ApiRequest.new(@configuration).get(endpoint)
     end
 
-    def update_template_version(template_id, version_id, name, subject, html, text, preheader='', amp_html='')
+    def update_template_version(template_id, version_id, name, subject, html, text, preheader='', amp_html='', template_data={})
       payload = {
         name: name,
         subject: subject,
         html: html,
         text: text,
         preheader: preheader,
-        amp_html: amp_html
+        amp_html: amp_html,
+        template_data: template_data
       }
 
       endpoint = "templates/#{template_id}/versions/#{version_id}"
       SendWithUs::ApiRequest.new(@configuration).put(endpoint, payload.to_json)
     end
 
-    def create_template_version(template_id, name, subject, html, text, preheader='', amp_html='')
+    def create_template_version(template_id, name, subject, html, text, preheader='', amp_html='', template_data={})
       payload = {
         name: name,
         subject: subject,
         html: html,
         text: text,
         preheader: preheader,
-        amp_html: amp_html
+        amp_html: amp_html,
+        template_data: template_data
       }
 
       endpoint = "templates/#{template_id}/versions"

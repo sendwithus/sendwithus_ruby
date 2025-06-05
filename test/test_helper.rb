@@ -5,6 +5,7 @@ require File.expand_path('../../lib/send_with_us.rb', __FILE__)
 
 require 'rubygems'
 require 'bundler'
+MiniTest = Minitest unless defined?(MiniTest)
 require "mocha/minitest"
 
 begin
